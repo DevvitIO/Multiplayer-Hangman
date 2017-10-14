@@ -1,0 +1,26 @@
+{
+  "name": "multiplayer-hangman",
+  "version": "0.0.0",
+  "description": "A multiplayer game by Redditors",
+  "main": "index.js",
+  "author": "Miguel Rico",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack -p --env.prod",
+    "dev": "webpack-dev-server --env.dev --port 3000 --hot --host 0.0.0.0"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "hbs": "~4.0.1",
+    "morgan": "~1.9.0",
+    "serve-favicon": "~2.4.5",
+    "webpack": "^3.7.1",
+    "webpack-dev-server": "^2.9.1"
+  }
+}
