@@ -24,11 +24,16 @@ Get task assigned.
 Use your awesome coding skills to fix some of the bugs!
 
 ## Running the project
-
+In console:
 ````
 npm install
-npm run dev
+npm run dev //will run webpack-dev-server, letting you view your changes faster by instantly building when a file changes.
 navigate browser to http://localhost:3000/
+````
+
+````
+//to build project
+npm run build 
 ````
 The back end was created with express generator, in case you're familiar with it: app.js, bin/, routes/, views/ are part of the back end.
 
@@ -45,7 +50,5 @@ like to work on a specific issue before starting.
 the project back.
 
 ## Sidenotes
-
-Uses webpack-dev-server
 
 Express will be installed and I included the files. We will tie it with a backend in further releases. Do not worry about it right now.
