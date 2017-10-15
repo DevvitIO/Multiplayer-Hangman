@@ -9,9 +9,9 @@ export default class Store{
 	}
 
 	/**
-	 *
-	 * @param {string}guess
-	 * @param {function} callBack
+	 *	Saves the user's recent guess, checks to see if it is a correct guess
+	 * @param {string} guess
+	 * @param {function} callBack - controller.updateSecretWord
 	 */
 	saveGuess(guess, callBack){
 		console.log("Store.saveGuess", guess);
@@ -22,18 +22,29 @@ export default class Store{
 		this.remainingGuesses--;
 		console.log("Store remainingGuesses", this.remainingGuesses);
 
+		//if it was a correct guess
 		if(this.secretWord.includes(guess)){
 			console.log("the word does include:", guess);
 
+			//replace the underscore with correct guess
 			this.secretWord.map((letter, index) =>{
 				if (guess === letter){
 					this.currentProgress[index] = guess;
 				}
 			});
 
-			if(callBack){
-				callBack(this.currentProgress.join(' '));
-			}
+		} else {
+			console.log("Sorry, incorrect guess!");
+		}
+
+		if(callBack){
+			const gameUpdate = {
+				remainingGuesses: this.remainingGuesses,
+				userGuesses: this.userGuesses,
+			};
+
+			//controller.updateSecretWord
+			callBack(this.currentProgress.join(' '), gameUpdate);
 		}
 	}
 

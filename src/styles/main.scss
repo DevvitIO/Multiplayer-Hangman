@@ -1,0 +1,12 @@
+@import '_variables.scss'; //how you get access to variables
+
+h1{
+  color: $headerColor; //this make it easy to change colors through your whole site
+}
+
+//===================================
+//HELPER CLASSES
+//===================================
+.bold{
+  font-weight: bold;
+}

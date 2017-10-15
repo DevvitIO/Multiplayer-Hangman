@@ -1,5 +1,7 @@
 import {addEvent} from "./helpers";
 
+import './styles/game-view.scss';
+
 export default class View{
 	constructor(){
 		console.log("View loaded");
@@ -7,9 +9,19 @@ export default class View{
 		this.guessInput = document.getElementById('guessInput');
 		this.guessSubmit = document.getElementById('guess-submit');
 		this.secretWordContainer = document.getElementById('secret-word-container');
-
+		this.gameViewContainer = document.getElementById('game-view-container');
+		this.userGuesses = document.getElementById('user-guesses');
 	}
 
+	/**
+	 * Sets the game view, should also set the correct pieces of the hangman
+	 */
+	setGameView(){
+		let img = document.createElement('img');
+		img.setAttribute('src', require('./assets/img/bg.jpg'));
+		img.id = 'game-view';
+		this.gameViewContainer.appendChild(img);
+	}
 	/**
 	 * This displays the secret word as underscores. One underscore per letter.
 	 * @param {Array} secretWord
@@ -27,10 +39,23 @@ export default class View{
 
 	/**
 	 *
-	 * @param {Array} secretWordUpdate - array with correct guess letters filled in
+	 * @param {string} secretWordUpdate - A string containing correct user guesses and remaining letters as underscores
+	 * @param {Object} gameUpdate - Contains information on the current status of the game
+	 * @param {string} gameUpdate.remainingGuesses - How many more times user can guess
+	 * @param {Array} gameUpdate.userGuesses - Contains all of the user guesses
 	 */
-	updateSecretWordDisplay(secretWordUpdate){
+	updateSecretWordDisplay(secretWordUpdate, gameUpdate){
 		this.secretWordContainer.innerHTML = secretWordUpdate;
+		console.log("and the game status is..", gameUpdate);
+		this.updateUserGuessDisplay(gameUpdate.userGuesses);
+	}
+
+	/**
+	 * Displays and updates the user guesses on screen
+	 * @param userGuesses
+	 */
+	updateUserGuessDisplay(userGuesses){
+		this.userGuesses.innerHTML = `Your guesses so far: <span class='bold'>${userGuesses}</span>`;
 	}
 
 	/**

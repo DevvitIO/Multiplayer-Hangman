@@ -4,6 +4,7 @@ export default class Controller {
 		this.view = view;
 
 		this.view.setSecretWordDisplay(this.store.secretWord);
+		this.view.setGameView();
 		view.bindSaveUserGuess(this.saveUserGuess.bind(this));
 	}
 
@@ -12,17 +13,14 @@ export default class Controller {
 	 * @param {string} guess - single character guess made by the user
 	 */
 	saveUserGuess(guess){
-		this.store.saveGuess(guess, (update) => {
-			this.updateSecretWord(update);
+		this.store.saveGuess(guess, (secretWordUpdate, gameUpdate) => {
+			this.updateSecretWord(secretWordUpdate, gameUpdate);
 		});
 	}
 
-	/**
-	 *
-	 * @param {string} secretWordUpdate - A string containing correct user guesses and remaining letters as underscores
-	 */
-	updateSecretWord(secretWordUpdate){
-		this.view.updateSecretWordDisplay(secretWordUpdate);
+
+	updateSecretWord(secretWordUpdate, gameUpdate){
+		this.view.updateSecretWordDisplay(secretWordUpdate, gameUpdate);
 	}
 
 }
