@@ -15,12 +15,14 @@ export default class Store{
 	 */
 	saveGuess(guess, callBack){
 		console.log("Store.saveGuess", guess);
-		//save the user guess into the array
-		if(this.userGuesses.indexOf(guess) > -1){
-			this.gameMessage = document.getElementById('game-message');
-			this.gameMessage.innerHTML = `Duplicated letter <strong>`+ guess + `</strong>`;
+		this.gameMessage = document.getElementById('game-message');
+
+		if(!/^([a-zA-Z]{1})$/.test(guess)){
+			this.gameMessage.innerHTML = `Not valid expression <strong>`+ guess + `</strong>. Only one letter is allowed`;
 			return false;
 		}
+
+		//save the user guess into the array
 		this.userGuesses.push(guess);
 		console.log("Store userGuesses", this.userGuesses);
 		//since user submitted guess, take away a guess
@@ -47,6 +49,7 @@ export default class Store{
 			console.log('no more guesses remaining');
 			document.getElementById("guessInput").disabled = true;
 			document.getElementById("guess-submit").disabled = true;
+			this.gameMessage.innerHTML = `You are dead!!! All guesses already used.`;
 		}
 		if(callBack){
 			const gameUpdate = {
