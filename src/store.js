@@ -6,7 +6,6 @@ export default class Store{
 		this.currentProgress = ['_', '_','_','_','_','_','_','_','_','_']; //only hard coded temporally
 		this.userGuesses = [];
 		this.remainingGuesses = 6;
-		this.message ="";
 	}
 
 	/**
