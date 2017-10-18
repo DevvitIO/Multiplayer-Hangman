@@ -21,6 +21,8 @@ export default class View{
 		img.setAttribute('src', require('./assets/img/bg.jpg'));
 		img.id = 'game-view';
 		this.gameViewContainer.appendChild(img);
+		this.guessInput.maxLength = 1;
+		
 	}
 	/**
 	 * This displays the secret word as underscores. One underscore per letter.
@@ -62,6 +64,7 @@ export default class View{
 	 * Adds event listener to the submit button. Checks for input then tells controller to add guess
 	 * @param {Function} handler
 	 */
+
 	bindSaveUserGuess(handler){
 		addEvent(this.guessSubmit, 'click', (e) =>{
 			const guessedLetter = this.guessInput.value.trim();

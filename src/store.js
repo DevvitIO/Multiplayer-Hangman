@@ -21,7 +21,7 @@ export default class Store{
 		//since user submitted guess, take away a guess
 		this.remainingGuesses--;
 		console.log("Store remainingGuesses", this.remainingGuesses);
-
+		
 		//if it was a correct guess
 		if(this.secretWord.includes(guess)){
 			console.log("the word does include:", guess);
@@ -36,7 +36,13 @@ export default class Store{
 		} else {
 			console.log("Sorry, incorrect guess!");
 		}
-
+		// If this.remainingGuesses === 0 disabled input & submit button to stop user from guessing
+		// Can remove the "guessInput".disabled line to just disable submit button to prevent user from submitting a guess
+		if(this.remainingGuesses === 0) {
+			console.log('no more guesses remaining');
+			document.getElementById("guessInput").disabled = true;
+			document.getElementById("guess-submit").disabled = true;
+		}
 		if(callBack){
 			const gameUpdate = {
 				remainingGuesses: this.remainingGuesses,
