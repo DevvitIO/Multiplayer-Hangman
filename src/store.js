@@ -6,6 +6,7 @@ export default class Store{
 		this.currentProgress = ['_', '_','_','_','_','_','_','_','_','_']; //only hard coded temporally
 		this.userGuesses = [];
 		this.remainingGuesses = 6;
+		this.message ="";
 	}
 
 	/**
@@ -16,6 +17,11 @@ export default class Store{
 	saveGuess(guess, callBack){
 		console.log("Store.saveGuess", guess);
 		//save the user guess into the array
+		if(this.userGuesses.indexOf(guess) > -1){
+			this.gameMessage = document.getElementById('game-message');
+			this.gameMessage.innerHTML = `Duplicated letter <strong>`+ guess + `</strong>`;
+			return false;
+		}
 		this.userGuesses.push(guess);
 		console.log("Store userGuesses", this.userGuesses);
 		//since user submitted guess, take away a guess
