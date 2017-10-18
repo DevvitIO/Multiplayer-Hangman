@@ -41,9 +41,6 @@ export default class Store{
 
 		} else {
 			console.log("Sorry, incorrect guess!");
-			//since user submitted guess, take away a guess
-			this.remainingGuesses--;
-			console.log("Store remainingGuesses", this.remainingGuesses);
 		}
 		// If this.remainingGuesses === 0 disabled input & submit button to stop user from guessing
 		// Can remove the "guessInput".disabled line to just disable submit button to prevent user from submitting a guess

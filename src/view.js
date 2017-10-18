@@ -70,10 +70,11 @@ export default class View{
 		addEvent(this.guessSubmit, 'click', (e) =>{
 			const guessedLetter = this.guessInput.value.trim();
 			if(guessedLetter){
-				handler(this.guessInput.value)
+				handler(this.guessInput.value);
 			} else {
 				console.log("no value submitted");
 			}
+			this.guessInput.value = "";
 		});
 
 		document.addEventListener('keypress', (e) => {
