@@ -11,6 +11,7 @@ export default class View{
 		this.secretWordContainer = document.getElementById('secret-word-container');
 		this.gameViewContainer = document.getElementById('game-view-container');
 		this.userGuesses = document.getElementById('user-guesses');
+		this.gameMessage = document.getElementById('game-message');
 	}
 
 	/**

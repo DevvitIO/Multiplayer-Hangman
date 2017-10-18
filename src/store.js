@@ -1,9 +1,9 @@
 export default class Store{
 	constructor(){
 		console.log("Store added");
-
-		this.secretWord = ['a', 'p','p','l','e','j','a','c','k','s']; //only hard coded temporally
-		this.currentProgress = ['_', '_','_','_','_','_','_','_','_','_']; //only hard coded temporally
+		let secretString = "applejacks"; //only hard coded temporally
+		this.secretWord = secretString.split(""); 
+		this.currentProgress = secretString.replace(/./g, "_").split(""); 
 		this.userGuesses = [];
 		this.remainingGuesses = 6;
 	}
@@ -15,12 +15,14 @@ export default class Store{
 	 */
 	saveGuess(guess, callBack){
 		console.log("Store.saveGuess", guess);
-		//save the user guess into the array
-		this.userGuesses.push(guess);
-		console.log("Store userGuesses", this.userGuesses);
-		//since user submitted guess, take away a guess
-		this.remainingGuesses--;
-		console.log("Store remainingGuesses", this.remainingGuesses);
+		//don't add a repeat guess to our list
+		if (this.userGuesses.indexOf(guess) >= 0) {
+			return console.log("Repeat guess", guess);
+		} else {
+			//save the user guess into the array
+			this.userGuesses.push(guess);
+			console.log("Store userGuesses", this.userGuesses);
+		}
 		
 		//if it was a correct guess
 		if(this.secretWord.includes(guess)){
@@ -35,6 +37,9 @@ export default class Store{
 
 		} else {
 			console.log("Sorry, incorrect guess!");
+			//since user submitted guess, take away a guess
+			this.remainingGuesses--;
+			console.log("Store remainingGuesses", this.remainingGuesses);
 		}
 		// If this.remainingGuesses === 0 disabled input & submit button to stop user from guessing
 		// Can remove the "guessInput".disabled line to just disable submit button to prevent user from submitting a guess
@@ -53,5 +58,4 @@ export default class Store{
 			callBack(this.currentProgress.join(' '), gameUpdate);
 		}
 	}
-
 }
