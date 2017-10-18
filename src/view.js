@@ -74,6 +74,13 @@ export default class View{
 				console.log("no value submitted");
 			}
 		});
+
+		//listens for the enter key
+		document.addEventListener('keypress', (e) => {
+			if (e.which == 13) {
+				this.guessSubmit.click();
+			}
+		});
 	}
 
 
