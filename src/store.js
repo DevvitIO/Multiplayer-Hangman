@@ -15,15 +15,19 @@ export default class Store{
 	 */
 	saveGuess(guess, callBack){
 		console.log("Store.saveGuess", guess);
-		//don't add a repeat guess to our list
-		if (this.userGuesses.indexOf(guess) >= 0) {
-			return console.log("Repeat guess", guess);
-		} else {
-			//save the user guess into the array
-			this.userGuesses.push(guess);
-			console.log("Store userGuesses", this.userGuesses);
+		//save the user guess into the array
+		if(this.userGuesses.indexOf(guess) > -1){
+			console.log("Repeat guess", guess);
+			this.gameMessage = document.getElementById('game-message');
+			this.gameMessage.innerHTML = `Duplicated letter <strong>`+ guess + `</strong>`;
+			return false;
 		}
-		
+		this.userGuesses.push(guess);
+		console.log("Store userGuesses", this.userGuesses);
+		//since user submitted guess, take away a guess
+		this.remainingGuesses--;
+		console.log("Store remainingGuesses", this.remainingGuesses);
+	
 		//if it was a correct guess
 		if(this.secretWord.includes(guess)){
 			console.log("the word does include:", guess);
