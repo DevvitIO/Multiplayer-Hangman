@@ -11,6 +11,7 @@ export default class View{
 		this.secretWordContainer = document.getElementById('secret-word-container');
 		this.gameViewContainer = document.getElementById('game-view-container');
 		this.userGuesses = document.getElementById('user-guesses');
+		this.gameMessage = document.getElementById('game-message');
 	}
 
 	/**
@@ -69,9 +70,16 @@ export default class View{
 		addEvent(this.guessSubmit, 'click', (e) =>{
 			const guessedLetter = this.guessInput.value.trim();
 			if(guessedLetter){
-				handler(this.guessInput.value)
+				handler(this.guessInput.value);
 			} else {
 				console.log("no value submitted");
+			}
+			this.guessInput.value = "";
+		});
+
+		document.addEventListener('keypress', (e) => {
+			if (e.which == 13) {
+				this.guessSubmit.click();
 			}
 		});
 	}
