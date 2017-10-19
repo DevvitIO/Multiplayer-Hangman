@@ -3,3 +3,31 @@
     max-width: 200px;
   }
 }
+
+body{
+	right:35%;
+    width:380px;
+    height:100px;
+    position:absolute;
+    text-align:center;
+}
+h1{
+	margin:auto;
+    line-height:50px;
+    vertical-align:middle;
+}
+.space{
+	padding: 4px 0px;
+}
+.error{
+	color:red;
+}
+.warn{
+	color:#ffba60;
+}
+.correct{
+	color:#10a800;
+}
+#secret-word-container{
+	font-size:23px;
+}
