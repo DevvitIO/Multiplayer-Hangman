@@ -19,7 +19,7 @@ export default class View{
 	 */
 	setGameView(){
 		let img = document.createElement('img');
-		img.setAttribute('src', require('./assets/img/bg.jpg'));
+		img.setAttribute('src', require('./assets/img/6.jpg'));
 		img.id = 'game-view';
 		this.gameViewContainer.appendChild(img);
 		this.guessInput.maxLength = 1;
