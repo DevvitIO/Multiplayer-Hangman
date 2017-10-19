@@ -1,9 +1,9 @@
 export default class Store{
 	constructor(){
 		console.log("Store added");
-
-		this.secretWord = ['a', 'p','p','l','e','j','a','c','k','s']; //only hard coded temporally
-		this.currentProgress = ['_', '_','_','_','_','_','_','_','_','_']; //only hard coded temporally
+		let secretString = "applejacks"; //only hard coded temporally
+		this.secretWord = secretString.split(""); 
+		this.currentProgress = secretString.replace(/./g, "_").split(""); 
 		this.userGuesses = [];
 		this.remainingGuesses = 6;
 	}
@@ -17,6 +17,7 @@ export default class Store{
 		console.log("Store.saveGuess", guess);
 		//save the user guess into the array
 		if(this.userGuesses.indexOf(guess) > -1){
+			console.log("Repeat guess", guess);
 			this.gameMessage = document.getElementById('game-message');
 			this.gameMessage.innerHTML = `Duplicated letter <strong>`+ guess + `</strong>`;
 			return false;
@@ -26,7 +27,7 @@ export default class Store{
 		//since user submitted guess, take away a guess
 		this.remainingGuesses--;
 		console.log("Store remainingGuesses", this.remainingGuesses);
-		
+	
 		//if it was a correct guess
 		if(this.secretWord.includes(guess)){
 			console.log("the word does include:", guess);
@@ -58,5 +59,4 @@ export default class Store{
 			callBack(this.currentProgress.join(' '), gameUpdate);
 		}
 	}
-
 }
