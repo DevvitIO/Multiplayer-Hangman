@@ -1,7 +1,7 @@
 export default class Store{
 	constructor(){
 		console.log("Store added");
-		let secretString = "qwertyuiqq"; //only hard coded temporally
+		let secretString = "observation"; //only hard coded temporally
 		this.secretWord = secretString.split(""); 
 		this.currentProgress = secretString.replace(/./g, "_").split(""); 
 		this.userGuesses = [];
