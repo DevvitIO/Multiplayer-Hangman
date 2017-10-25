@@ -1,13 +1,51 @@
-export default class Store{
+export function Build() {
+    return new Promise((resolve, reject) => {
+        getStore()
+            .then((store) => { 
+                resolve(store);
+            });
+    })
+    .then((newStore) => {
+        return(newStore);
+    })
+}
+
+    function getStore() {
+        return new Promise((resolve, reject) => {
+            var file = ('./dist/words-alpha.txt');
+            var rawFile = new XMLHttpRequest();
+            rawFile.open("GET", file);
+            rawFile.onreadystatechange = function () {
+                if(rawFile.readyState === 4) {
+                    if(rawFile.status === 200 || rawFile.status == 0) {
+                        let store = new Store();
+                        let wordsArray = rawFile.responseText.split("\n");
+                        let length = wordsArray.length;
+                        let word = wordsArray[Math.floor(Math.random() * length) + 1];
+                        store.secretString = word;
+                        store.secretWord = word.split(""); 
+                        store.currentProgress = word.replace(/./g, "_").split(""); 
+                        store.userGuesses = [];
+                        store.remainingGuesses = 6;
+                        store.correctLetters = 0;
+                        resolve(store);
+                    }
+                }
+            }
+            rawFile.send();
+        });
+    }
+
+export class Store{
 	constructor(){
 		console.log("Store added");
-		let secretString = "observation"; //only hard coded temporally
-		this.secretWord = secretString.split(""); 
-		this.currentProgress = secretString.replace(/./g, "_").split(""); 
+		this.secretString = ""; //only hard coded temporally
+		this.secretWord = this.secretString.split(""); 
+		this.currentProgress = this.secretString.replace(/./g, "_").split(""); 
 		this.userGuesses = [];
 		this.remainingGuesses = 6;
-		this.correctLetters = 0;
-	}
+        this.correctLetters = 0;
+    }
 
 	/**
 	 *	Saves the user's recent guess, checks to see if it is a correct guess
