@@ -39,7 +39,7 @@ export function Build() {
 export class Store{
 	constructor(){
 		console.log("Store added");
-		this.secretString = ""; //only hard coded temporally
+		this.secretString = "";
 		this.secretWord = this.secretString.split(""); 
 		this.currentProgress = this.secretString.replace(/./g, "_").split(""); 
 		this.userGuesses = [];

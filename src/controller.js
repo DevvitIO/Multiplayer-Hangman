@@ -18,8 +18,8 @@ export default class Controller {
 		});
     }
 
+
 	updateSecretWord(secretWordUpdate, gameUpdate){
-        console.log('updateSecretWord');
 		this.view.updateSecretWordDisplay(secretWordUpdate, gameUpdate);
 	}
 
