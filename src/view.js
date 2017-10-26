@@ -19,7 +19,7 @@ export default class View{
 	 */
 	setGameView(){
 		let img = document.createElement('img');
-		img.setAttribute('src', require('./assets/img/bg.jpg'));
+		img.setAttribute('src', require('./assets/img/6.jpg'));
 		img.id = 'game-view';
 		this.gameViewContainer.appendChild(img);
 		this.guessInput.maxLength = 1;
@@ -33,7 +33,7 @@ export default class View{
 		console.log("this view setSecretWord:", secretWord);
 		let letterPlaces = '_';
 
-		for(let i = 0; i < secretWord.length; i++){
+		for(let i = 1; i < secretWord.length; i++){
 			letterPlaces += ' _';
 		}
 
@@ -84,6 +84,4 @@ export default class View{
 			}
 		});
 	}
-
-
 }

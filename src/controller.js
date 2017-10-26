@@ -16,7 +16,7 @@ export default class Controller {
 		this.store.saveGuess(guess, (secretWordUpdate, gameUpdate) => {
 			this.updateSecretWord(secretWordUpdate, gameUpdate);
 		});
-	}
+    }
 
 
 	updateSecretWord(secretWordUpdate, gameUpdate){
