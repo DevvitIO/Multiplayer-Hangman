@@ -10,3 +10,4 @@
 out
 /public/assets/uploads/*
 gen
+package-lock.json
