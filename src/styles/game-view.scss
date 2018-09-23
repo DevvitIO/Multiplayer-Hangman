@@ -5,16 +5,18 @@
 }
 
 body{
-	right:35%;
-    width:380px;
+    max-width:1000px;
+    margin:0 auto;
+    width:60%;
     height:100px;
-    position:absolute;
     text-align:center;
 }
 h1{
 	margin:auto;
-    line-height:50px;
+    line-height:4.5rem;
     vertical-align:middle;
+  font-family: 'Anton', sans-serif;
+  font-size: 3rem;
 }
 .space{
 	padding: 4px 0px;
@@ -33,6 +35,27 @@ h1{
 }
 
 
+#logo {
+  position: fixed;
+  left: 10px;
+  span {
+    display: inline;
+  }
+  .part-1 {
+    font-size:2rem;
+    color: #bd6161;
+  }
+  .part-2 {
+    font-size:2.5rem;
+    color: #5b5bba;
+  }
+  .part-3 {
+    margin-top: -105px;
+    display: block;
+    font-size:3.05rem;
+  }
+}
+
 @-webkit-keyframes swinging{
     0%{-webkit-transform: rotate(2deg);}
     50%{-webkit-transform: rotate(-1deg)}
@@ -50,4 +73,9 @@ h1{
     transform-origin: 50% 0;
     -webkit-animation: swinging 3.5s ease-in-out forwards infinite;
     animation: swinging 3.5s ease-in-out forwards infinite;
+}
+
+#hangman-svg {
+  max-width: 500px;
+  margin-top: 100px;
 }
