@@ -1,6 +1,6 @@
 import { addEvent } from "./helpers";
 
-import './styles/game-view.scss';
+import './styles/main.scss';
 
 export default class View {
 	constructor() {
@@ -21,7 +21,6 @@ export default class View {
 	 */
 	setGameView() {
 		let img = document.createElement('img');
-		img.setAttribute('src', require('./assets/img/6.jpg'));
 		img.id = 'game-view';
 		this.gameViewContainer.appendChild(img);
 		this.guessInput.maxLength = 1;
@@ -94,5 +93,30 @@ export default class View {
 				this.guessSubmit.click();
 			}
 		});
+	}
+
+	/*
+	 * The game is won
+	 */
+	SetVictory() {
+		this.gameMessage.innerHTML = `<p class="correct">Congratulations! You WIN :)</p>`;
+		document.getElementById('secret-word-container').className += 'correct';
+		document.getElementById("guessInput").disabled = true;
+		document.getElementById("guess-submit").disabled = true;
+	}
+	
+	/*
+	 * The loser lost
+	 */
+	SetLoss() {
+		console.log('no more guesses remaining');
+		document.getElementById("guessInput").disabled = true;
+		document.getElementById("guess-submit").disabled = true;
+		this.gameMessage.innerHTML = `<p class="error">You are dead!!! Correct word was <strong>`+this.secretWord.join("")+`</strong></p>`;
+		document.getElementById('secret-word-container').className += 'error';
+	}
+
+	SetIncorrectAnswer() {
+		// Add a body part, add text
 	}
 }

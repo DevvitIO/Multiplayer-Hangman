@@ -1,6 +1,5 @@
 import Controller from './controller';
 import View from './view';
-import { Build } from './store';
 
 //styles
 import main from './styles/main.scss';

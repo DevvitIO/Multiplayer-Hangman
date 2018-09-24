@@ -9,6 +9,13 @@ export default class Controller {
 	}
 
 	/**
+	 * homepage view
+	*/
+	index(res, req) {
+		res.render('index', { title: 'Express' });
+	}
+
+	/**
 	 * Receives guess input from view, tells store to save it and then call updateSecretWord
 	 * @param {string} guess - single character guess made by the user
 	 */
@@ -22,5 +29,7 @@ export default class Controller {
 	updateSecretWord(secretWordUpdate, gameUpdate){
 		this.view.updateSecretWordDisplay(secretWordUpdate, gameUpdate);
 	}
+
+
 
 }
