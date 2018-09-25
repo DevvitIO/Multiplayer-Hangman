@@ -1,11 +1,13 @@
 # Multiplayer Hangman game
 
-A real-time multiplayer Hangman game. Yeah it's going to blow your damn mind!
+" A real-time multiplayer Hangman game. Yeah it's going to blow your damn mind! " 
+
+So they say. This project is getting a reboot this year, hopefully just in time for haktoberfest ! 
 
 ## Purpose 
 
-A collab project between Redditors with the purpose to learn new technologies as we go. This project should have issues of varying difficulties.
-It was created to help devs advance in their skillset and to learn to work together in a team.
+A collab project between Redditors with the purpose to learn new technologies as we go. This project has issues of varying difficulties so all are welcome.
+It was created to help devs advance in their skillset, have a bit of fun, and make something interesting.
 
 ## Getting Started
 
@@ -35,20 +37,20 @@ navigate browser to http://localhost:3000/
 //to build project
 npm run build 
 ````
-The back end was created with express generator, in case you're familiar with it: app.js, bin/, routes/, views/ are part of the back end.
-
 
 ## Contributing Requirements
-* Readability should be the name of the game here. No need to try to be super clever and making complicated one line statements. It's a group effort not a competition.
-* You will need to be assigned a task before you can start working on any issues. Please make a comment that you would
-like to work on a specific issue before starting.
+* Readability is key. If you find it's getting too long, separate it out
+* Flexibility: Make a "popWindow()" function, don't just manipulate all the values in an unrelated function
+* You will need to be assigned a task before you can start working on any issues. Discord is generally a good way to go about this at the moment
+
+## Seeking help
+
+We're available on discord, or you can post a specific issue in the issues list here. We like questions!
 
 ## MANDATORY RULES
 
-* PR's need to mention what bug/feature you are working on.
-* If you get a task assigned but then go afk for a week or longer you wil be removed from the task in order to not hold
-the project back.
+* If you get task assigned and you've been absent for a while on a critical part of the project, someone else will do it in your stead.
 
 ## Sidenotes
 
-Express will be installed and I included the files. We will tie it with a backend in further releases. Do not worry about it right now.
+We've started off with an existing version of this project that didn't get too far on the Express Framework. This was overkill for our needs, so we more or less now have a simpler node application.
