@@ -1,43 +1,52 @@
-const {resolve} = require('path');
+const path = require("path");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 
-module.exports = env => {
-	console.log(env);
-	return {
-		entry: './server/src/client.js',
-		output: {
-			path: resolve('dist'),
-			filename: "bundle.js",
-			publicPath: 'dist/',
-			pathinfo: !env.prod,
-		},
-		devtool: env.prod ? "source-map" : 'eval',
-		module: {
-			loaders: [
-				{test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader']},
-				{
-					test: /\.scss$/,
-					loaders: ["style-loader", "css-loader", "sass-loader"]
-				},
-				{
-					test: /\.(png|jpg|gif|svg)$/,
-					use: [
-						{
-							loader: 'file-loader',
-							options: {}
-						}
-					]
-				}
-			]
-		},
-		  plugins: [
+const outputDirectory = "dist";
+
+module.exports = {
+  mode: "development",
+  entry: "./client/client.js",
+  watch: true,
+  output: {
+    path: path.join(__dirname, "client", outputDirectory),
+    filename: "bundle.js"
+  },
+  watchOptions: {
+    ignored: ['server/**/*.js', 'node_modules']
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      },
+      {
+        test: /\.scss$/,
+        use: ["style-loader", "css-loader", "sass-loader"]
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {}
+          }
+        ]
+      }
+    ]
+  },
+  plugins: [
+    new CopyWebpackPlugin([
+      { from: "assets/**/*", context: "client" },
+      { from: "index.html", context: "client" }
+    ]),
     new BrowserSyncPlugin({
-      // browse to http://localhost:3000/ during development,
-      // ./public directory is being served
-      host: 'localhost',
-      port: 3000,
-	  files: ["**/*.html", "**/*.js"]
+      server: { baseDir: ['client/dist', 'server'] },
+      watch: true
     })
   ]
-	}
 };
