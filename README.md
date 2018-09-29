@@ -15,19 +15,17 @@ It was created to help devs advance in their skillset, have a bit of fun, and ma
 
 ## Getting Started
 
-Based on the [MVC architecture](http://todomvc.com/examples/vanilla-es6/)
-
 Join our organisation by visiting here:
 https://orgmanager.miguelpiedrafita.com/join/32555830
 
 Come hang out with us at our Discord channel here:
 https://discordapp.com/invite/erPjG7C
 
-Clone the repository, and go fork yourself.
+1. Clone the repository, and go fork yourself.
 
-Pick an issue from the list or ask if there's anything to do.
+2. Pick an issue from the list or ask if there's anything to do.
 
-Use your awesome coding skills to add features or fix bugs!
+3. Use your awesome coding skills to add features or fix bugs!
 
 ## Running the project
 In console:
