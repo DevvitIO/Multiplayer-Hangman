@@ -20,12 +20,17 @@ usernameSubmit.addEventListener('click', function(){
 });
 
 function setUsername(username) {
-	// let username = document.getElementById("usernameInput").value;
 	socket.emit('setUsername', username);
 }
 
 function submitGuess(letter) {
-	// let letter = document.getElementById("guessInput").value;
+	let guessFound = userGuesses.innerHTML.split(',').find((guess) => {
+      return guess === letter;
+    });
+    if(guessFound === letter){
+    	gameMessage.innerHTML = "That letter has already been guessed!";
+    	return;
+    }
 	socket.emit('newGuess', letter);
 }
 
@@ -43,32 +48,33 @@ socket.on('gameInformation', (data) => {
 });
 
 socket.on('repeatGuess', (data) => {
-	gameMessage.innerHTML = "That letter has already been guessed. Try again!";
+	gameMessage.innerHTML = "That letter has already been guessed!";
 });
 
 socket.on('incorrectGuess', (data) => {
-	console.log(data);
 	updateGameState(data);
 	gameMessage.innerHTML = data.guesser + ' guessed incorrectly. There are ' + (6 - data.incorrect) + ' guesses left.';
 });
 
 socket.on('correctGuess', (data) => {
-	console.log(data);
 	updateGameState(data);
 	gameMessage.innerHTML = data.guesser + ' guessed correctly!';
 });
 
 socket.on('victory', (data) => {
+	guessSubmit.disabled = true;
 	updateGameState(data);
 	gameMessage.innerHTML = '<span style="color: green">' + data.guesser + ' guessed correctly to win the game! Victory!</span>';
 });
 
 socket.on('gameOver', (data) => {
+	guessSubmit.disabled = true;
 	updateGameState(data);
 	gameMessage.innerHTML = '<span style="color: red">' + data.guesser + ' guessed wrong. Game Over!</span>';
 });
 
 socket.on('newGame', (data) => {
+	guessSubmit.disabled = false;
 	updateGameState(data);
 	gameMessage.innerHTML = 'New game has started!';
 });

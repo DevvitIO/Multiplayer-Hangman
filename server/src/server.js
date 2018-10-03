@@ -19,132 +19,34 @@ export class Server {
     this.app.use("/", express.static(CLIENT_SOURCE));
   }
 
-
-
   initGame() {
     console.log("Initializing Game...");
     var game = new Game();
     var onlinePlayers = 0;
     this.io.on('connection', function(socket){
       onlinePlayers++;
-      socket.emit('gameInformation', {
-        blankword: game.blankWord,
-            guesses: game.guesses,
-            correct: game.correct,
-            incorrect: game.incorrect,
-            guesser: socket.username
-          });
+      socket.emit('gameInformation', game.getState());
       socket.emit('playersOnline', onlinePlayers);
       socket.broadcast.emit('playersOnline', onlinePlayers);
       //Emit to socket that connected AND broadcast to all sockets on connection
       //so all clients have accurate player count.
-      socket.username = "User";
+      socket.username = "User"; //Default username
 
       socket.on('setUsername', function(username){
         socket.username = username;
-        console.log('User set their name to ' + username);
       });
 
       socket.on('newGuess', function(letter){
-        console.log(socket.username + `'s ` + 'Guess: ' + letter);
         let guess = game.newGuess(letter);
-        if(guess === 'repeatGuess'){
-          socket.emit('repeatGuess', letter);
-        } else if(guess === 'incorrectGuess'){
-          if(game.incorrect >= 6){
-            socket.emit('gameOver', {
-              blankword: game.blankWord,
-              guesses: game.guesses,
-              correct: game.correct,
-              incorrect: game.incorrect,
-              guesser: socket.username
-            });
-            socket.broadcast.emit('gameOver', {
-              blankword: game.blankWord,
-              guesses: game.guesses,
-              correct: game.correct,
-              incorrect: game.incorrect,
-              guesser: socket.username
-            });
-            setTimeout(function() {
-              game = new Game();
-              socket.emit('newGame', {
-              blankword: game.blankWord,
-              guesses: game.guesses,
-              correct: game.correct,
-              incorrect: game.incorrect
-            });
-            socket.broadcast.emit('newGame', {
-              blankword: game.blankWord,
-              guesses: game.guesses,
-              correct: game.correct,
-               incorrect: game.incorrect
-              });
-            }, 5000);
-          } else {
-            socket.broadcast.emit('incorrectGuess', {
-              blankword: game.blankWord,
-              guesses: game.guesses,
-              correct: game.correct,
-              incorrect: game.incorrect,
-              guesser: socket.username
-            });
-            socket.emit('incorrectGuess', {
-              blankword: game.blankWord,
-              guesses: game.guesses,
-              correct: game.correct,
-              incorrect: game.incorrect,
-              guesser: socket.username
-            });
-          }
-        } else if(guess === 'correctGuess'){
-          if(game.blankWord.split(' ').join('') === game.word){
-            socket.emit('victory', {
-              blankword: game.blankWord,
-              guesses: game.guesses,
-              correct: game.correct,
-              incorrect: game.incorrect,
-              guesser: socket.username
-            });
-            socket.broadcast.emit('victory', {
-              blankword: game.blankWord,
-              guesses: game.guesses,
-              correct: game.correct,
-              incorrect: game.incorrect,
-              guesser: socket.username
-            });
-            setTimeout(function() {
-              game = new Game();
-              socket.emit('newGame', {
-              blankword: game.blankWord,
-              guesses: game.guesses,
-              correct: game.correct,
-              incorrect: game.incorrect
-            });
-            socket.broadcast.emit('newGame', {
-              blankword: game.blankWord,
-              guesses: game.guesses,
-              correct: game.correct,
-               incorrect: game.incorrect
-              });
-            }, 5000);
-            
-          } else {
-            socket.broadcast.emit('correctGuess', {
-              blankword: game.blankWord,
-              guesses: game.guesses,
-              correct: game.correct,
-              incorrect: game.incorrect,
-              guesser: socket.username
-            });
-            socket.emit('correctGuess', {
-              blankword: game.blankWord,
-              guesses: game.guesses,
-              correct: game.correct,
-              incorrect: game.incorrect,
-              guesser: socket.username
-            });
-          }
+        socket.emit(guess, game.getState(socket.username));
+        socket.broadcast.emit(guess, game.getState(socket.username));
+        //On gameOver or Victory, a new game will be created after 5 seconds
+        if(guess === 'gameOver' || guess === 'victory'){
+          setTimeout(function() {
+            game = new Game();
+            socket.emit('newGame', game.getState());
+          socket.broadcast.emit('newGame', game.getState());
+          }, 5000);
         }
       });
 
