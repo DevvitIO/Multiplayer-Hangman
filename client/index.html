@@ -11,8 +11,9 @@
 
 <body>
 	<h1 id="logo">
-		<span class="part-1">MULTI</span><span class="part-2">PLAYER</span><span class="part-3"><br />HANGMAN</span>
+		<span class="part-1">MULTI</span><span class="part-2">PLAYER</span><span class="part-3"><br />HANGMAN</span><br>
 	</h1>
+	<div>Online Players: <span id="onlinePlayers">0</span></div>
 	<div>
 		<div id="game-view-container">
 			<!-- SVG Image, haven't added in a templating language that can handle includes and make this pretty yet -->
@@ -66,13 +67,17 @@
 			<!-- end example -->
 		</div>
 
-		<div id="secret-word-container"></div>
+		<div id="secret-word-container"></div><br>
 		<label for="guessInput">Enter a letter</label>
 		<input id="guessInput" type="text" maxlength="1">
 		<button id="guess-submit">Submit</button>
 		<div id="game-message" class="space"></div>
 		<div id="user-guesses" class="space"></div>
+		<label for="usernameInput">Change Your Name</label>
+		<input id="usernameInput" type="text" maxlength="15">
+		<button id="username-submit">Submit</button>
 	</div>
+	<script src="socket.js"></script>
 	<script src="bundle.js"></script>
 </body>
 
