@@ -15,26 +15,31 @@ export class Game {
     let guessFound = this.guesses.find((guess) => {
       return guess === letter;
     });
-    if(guessFound === letter){
+
+    if (guessFound === letter) {
       return 'repeatGuess';
-    } else if(guessFound === undefined){
+    } else if (/[^\w\.\-]/.test(letter)) {
+      return 'invalidCharacter'
+    }
+    else if (guessFound === undefined) {
       this.guesses.push(letter);
       let blankWordArray = this.blankWord.split(' ');
       //Updates mystery/blank word based on guesses
-      for(let i = 0; i < this.word.split('').length; i++){
+      for (let i = 0; i < this.word.split('').length; i++) {
         const displayedLetter = this.word.split('')[i];
-        if(displayedLetter === letter){
+        if (displayedLetter === letter) {
           blankWordArray[i] = displayedLetter;
         }
       }
       this.blankWord = blankWordArray.join(' ');
 
-      if(prevBlank === this.blankWord){
+      if (prevBlank === this.blankWord) {
         return this.incorrectGuess();
         // this.incorrect++;
         // console.log(this.blankWord);
         // return 'incorrectGuess';
-      } else {
+      }
+      else {
         return this.correctGuess();
         // this.correct++;
         // console.log(this.blankWord);
@@ -42,12 +47,12 @@ export class Game {
       }
 
     }
-    
+
   }
 
   incorrectGuess() {
     this.incorrect++;
-    if(this.incorrect >= 6) {
+    if (this.incorrect >= 6) {
       this.status = 'inactive';
       return 'gameOver';
     } else {
@@ -57,7 +62,7 @@ export class Game {
 
   correctGuess() {
     this.correct++;
-    if(this.blankWord.split(' ').join('') === this.word) {
+    if (this.blankWord.split(' ').join('') === this.word) {
       this.status = 'inactive';
       return 'victory';
     } else {
@@ -73,7 +78,7 @@ export class Game {
       incorrect: this.incorrect,
       status: this.status
     };
-    if(guesser){
+    if (guesser) {
       gameState = {
         blankword: this.blankWord,
         guesses: this.guesses,
