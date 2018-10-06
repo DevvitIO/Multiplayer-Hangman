@@ -13,7 +13,8 @@ body{
     margin:0 auto;
     height:100%;
     text-align:center;
-    background-color:#ccc;
+    background-color: $backgroundColour;
+    color: $generalFontColour;
 }
 
 #game-view-container{
@@ -22,7 +23,10 @@ body{
 
 #bottom-panel {
   height:20%;
-  overflow:hidden;
+  position: fixed;
+  bottom:0;
+  width: 100%;
+  background-color: $bottomPanelColour1;
 }
 
 #sidebar-container{
