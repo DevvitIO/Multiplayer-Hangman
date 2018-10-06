@@ -14,7 +14,7 @@
     100%{transform: rotate(2deg);}
 }
  
-#Right_Arm, #Head, #Right_leg, #Left_Arm, #Torso, #Left_Leg, #Rope{
+#Right_Arm, #Head, #Right_leg, #Left_Arm, #Torso, #Left_Leg{
     display: none;
     -webkit-transform-origin: 50% 0;
     transform-origin: 50% 0;
@@ -22,9 +22,6 @@
     animation: swinging 3.5s ease-in-out forwards infinite;
 }
 
-#Rope {
-  display: block;
-}
 
 #hangman-svg {
   max-width: 500px;

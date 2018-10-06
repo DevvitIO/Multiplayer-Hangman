@@ -61,3 +61,46 @@ You'll find everything you need in the /client folder - scss, html, and the clie
 ### Back end development:
 
 Server.js contains the back end code. 
+
+
+# If you want to...
+
+To help you work out where to contribute before any motivation you had fizzles out and dies - here is my best guess as to where you might do that. (06/10/18)
+
+## Work on the game rules/logic...
+
+You'll need to check client/clientGame.js and server/src/game.js
+
+## Work on the design...
+
+client/index.html ( soon to be split into smaller files ) 
+
+All scss files
+
+## Improve networking...
+
+clientSocket.js
+
+## Create fun letter styles in css...
+
+client/assets/_secretwords.scss
+
+## Make some swanky animations for the letters...
+
+client/clientDisplay
+
+## Animate/Style the hangman...
+
+client/assets/_hangman.scss or client/clientDisplay - depending on what your plans are
+
+## Create other visual assets
+
+If you're a designer and want to create a logo, input panel, background effect, or pop up element (i.e congratulations panel ) just feel free to create and we'll help you implement it
+
+## Create a new hangman...
+
+Pop open your favourite vector capable drawing programming ( illustrator for example ) and get drawing. The five body parts require an ID, so divide into layers appropriately. 
+
+## Work on server side features like performance, multiple instances, player sharing, rooms...
+
+Primarily server.js, and game.js, with a touch of clientSocket.js and some front end tools. 
