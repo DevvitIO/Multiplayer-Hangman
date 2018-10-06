@@ -1,3 +1,7 @@
+#hangman-container {    
+  float: left;
+}
+
 @-webkit-keyframes swinging{
     0%{-webkit-transform: rotate(2deg);}
     50%{-webkit-transform: rotate(-1deg)}
@@ -24,5 +28,5 @@
 
 #hangman-svg {
   max-width: 500px;
-  margin-top: 100px;
+  height: 100%;
 }

@@ -13,9 +13,9 @@
 	<h1 id="logo">
 		<span class="part-1">MULTI</span><span class="part-2">PLAYER</span><span class="part-3"><br />HANGMAN</span><br>
 	</h1>
-	<div>Online Players: <span id="onlinePlayers">0</span></div>
-	<div>
-		<div id="game-view-container">
+	
+	<div id="game-view-container">
+		<div id="hangman-container">
 			<!-- SVG Image, haven't added in a templating language that can handle includes and make this pretty yet -->
 			<svg id="hangman-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 496.5 512.12"><defs><style>.cls-1,.cls-10,.cls-11,.cls-12,.cls-2,.cls-3,.cls-4,.cls-6,.cls-9{stroke:#000;stroke-miterlimit:10;}.cls-1{opacity:0.34;fill:url(#radial-gradient);}.cls-2{fill:#2a0f0d;}.cls-3,.cls-4{fill:#662d2b;}.cls-4{opacity:0.27;}.cls-5{fill:#666766;}.cls-10,.cls-6,.cls-8,.cls-9{fill:#f0a8ca;}.cls-11,.cls-7{fill:#f8bdd1;}.cls-9{stroke-width:0.75px;}.cls-10,.cls-11,.cls-12{stroke-width:0.5px;}</style><radialGradient id="radial-gradient" cx="236" cy="506.12" r="166.57" gradientUnits="userSpaceOnUse"><stop offset="0.1" stop-color="#020202"/><stop offset="0.41" stop-color="#03233e"/><stop offset="0.77"/></radialGradient></defs><title>hangman-pig</title><g id="Shadow"><ellipse class="cls-1" cx="236" cy="506.12" rx="235.5" ry="5.5"/></g><g id="Hangpost"><g id="Post_base" data-name="Post base"><path class="cls-2" d="M217.61,700.75s35.23,8.31,78.94,1.2c0,0,17.37-129.42,11-141.91,0,0,6.68-11.12,5.86-28.1s11.27-53.59,11.27-53.59,12-36.64,8.94-42.5S344.93,382,344.93,382l-1.76-36.45L354.61,336l2.5-11.87-4.7-.27,6-5.79L355,314.69s17.15-19.82,11.46-33.08,17.64-48.42,17.64-48.42-2.86-17.88-7.52-10.65c0,0-7.53-31.67-30.06-.55,0,0-15.39,2.74-14.74,16.23s-1.3,45.62-1.3,45.62-24,26.3-17.1,31.92-39.7,91-36,108.8S255,502.84,255,502.84s-20.61,67.58-19.6,80.73l-3.7-1.64S211.44,693,217.61,700.75Z" transform="translate(-137 -195.88)"/></g><g id="Upper_Post" data-name="Upper Post"><path class="cls-2" d="M363.5,219.5s-20,12,0,27c0,0,115-21,121-20l2,1,2-2,79-12s12-10-3-17c0,0-123,11-126,15s-4,0-4,0l-31,5Z" transform="translate(-137 -195.88)"/></g><g id="Layer_27" data-name="Layer 27"><path class="cls-3" d="M566.94,213.58s12.56-9.08-2.44-17.08h0s-15.11,9.17,2.44,17.08" transform="translate(-137 -195.88)"/></g><g id="Post_Lighting" data-name="Post Lighting"><path class="cls-4" d="M296.5,702.5s-49,4.64-58,1.32,5-111.32,5-111.32l-3-5s45-147,52-141c0,0,5-24,1-28s24-71,24-71,6-26,3-31,6-15,6-15l11-15,3-48s10-14,12-14c0,0-10,21-2,24s18-2,18-2L377,245s-12.5,26-11.5,29.75,8,19.75-11,39.75l4,4-6,5,5,1-3,11-11,10,1,36s-14.94,53-10.47,56-18,66.5-16.78,69.75c0,0-5.75,26.25-2.75,30.25s-7,23-7,23S312.5,586.5,296.5,702.5Z" transform="translate(-137 -195.88)"/></g><g id="Top_post_light" data-name="Top post light"><path class="cls-3" d="M557.5,202.5l-120,16s-4,5-5,3-72,7-72,7-2-4,4-7,4.15-2.39,4.15-2.39l64.75-7.44s2.1,2.82,5.1-1.18,123.5-14,123.5-14S556.5,201.5,557.5,202.5Z" transform="translate(-137 -195.88)"/></g></g><g id="Pig"><g id="Rope"><polyline class="cls-5" points="406.54 163.98 405.81 139.85 410.19 12.12 413.1 12.12 410.19 87.34"/></g><g id="Left_Leg" data-name="Left Leg"><g id="Layer_22" data-name="Layer 22"><path class="cls-6" d="M498.37,496.31s-24.08,24.62-22.63,30.3c0,0,10.21,2.84,8.75,8.52,0,0-.65,11.35,23.73-29.8h0s-10.56-9.51-9.85-9" transform="translate(-137 -195.88)"/><path class="cls-3" d="M478.67,525.2s-7.29,0-10.21,4.26,8.75,14.19,13.12,12.77,7.29-1.42,7.29-4.26a6.13,6.13,0,0,0-1.46-4.26S487.41,528,478.67,525.2Z" transform="translate(-137 -195.88)"/></g></g><g id="Left_Arm" data-name="Left Arm"><g id="LEft_arm_meat" data-name="LEft arm meat"><path class="cls-6" d="M490.3,368.36s-52.46,56.07-33.51,94.39c0,0,8.75-12.77,14.58-9.93l5.83,2.84" transform="translate(-137 -195.88)"/></g><g id="Layer_19" data-name="Layer 19"><path class="cls-3" d="M456.8,462.75s0,8.52,10.21,15.61c3.48,2.42,5.78,2.2,7.29.85,2.91-2.6,2.91-9.37,2.91-9.37v9.93s14.58-7.1,7.29-15.61l-7.29-8.52S468.46,445.72,456.8,462.75Z" transform="translate(-137 -195.88)"/></g></g><g id="Torso"><g id="Layer_16" data-name="Layer 16"><ellipse class="cls-6" cx="411.64" cy="231.39" rx="75.81" ry="92.25"/></g><g id="Nipples"><ellipse class="cls-7" cx="420.76" cy="201.94" rx="4.74" ry="4.61"/><path class="cls-7" d="M504.71,393.68a4.59,4.59,0,0,1-3.7,5.39,4.71,4.71,0,0,1-5.54-3.6,4.59,4.59,0,0,1,3.7-5.39A4.71,4.71,0,0,1,504.71,393.68Z" transform="translate(-137 -195.88)"/><path class="cls-8" d="M502.33,393.43a2.1,2.1,0,0,1-1.85,2.34,2.16,2.16,0,0,1-2.63-1.47A2.1,2.1,0,0,1,499.7,392,2.16,2.16,0,0,1,502.33,393.43Z" transform="translate(-137 -195.88)"/><path class="cls-8" d="M560.65,396.27a2.1,2.1,0,0,1-1.85,2.34,2.16,2.16,0,0,1-2.63-1.47A2.1,2.1,0,0,1,558,394.8,2.16,2.16,0,0,1,560.65,396.27Z" transform="translate(-137 -195.88)"/><path class="cls-9" d="M527.51,472s2.92,1.42,4.37,0" transform="translate(-137 -195.88)"/><path class="cls-9" d="M531.88,471.68s.06,3.17,2,3.77" transform="translate(-137 -195.88)"/><path class="cls-10" d="M531,472.32s3-1.31,2.76-3.3" transform="translate(-137 -195.88)"/></g></g><g id="Right_Arm" data-name="Right Arm"><g id="Layer_20" data-name="Layer 20"><path class="cls-6" d="M607,368.36s51,56.07,10.18,119.93c0,0,2.92-21.29-17.49-17,0,0,23.33-34.06-16-78.06" transform="translate(-137 -195.88)"/></g><g id="Hand"><path class="cls-3" d="M598.21,471.27s-11.66,9.93-5.83,19.87,5.83,7.1,5.83,7.1-2.92-7.1,0-12.77-4.37,14.19,2.92,12.77,14.58-7.1,14.58-7.1V488.3S620.08,467,598.21,471.27Z" transform="translate(-137 -195.88)"/></g></g><g id="Right_leg" data-name="Right leg"><path class="cls-6" d="M561.77,512.42s11.66,31.22,16,32.64c0,0,7.29-11.35,16-7.1s-13.12-32.64-13.12-32.64" transform="translate(-137 -195.88)"/><g id="Foot-2" data-name="Foot"><path class="cls-3" d="M577.8,545.07s-2.92,9.93,1.46,9.93,29.16,0,24.78-5.68a104.22,104.22,0,0,0-8.75-9.93S585.09,532.29,577.8,545.07Z" transform="translate(-137 -195.88)"/></g></g><g id="Head"><ellipse class="cls-6" cx="410.19" cy="107.21" rx="65.61" ry="54.64"/><g id="Nose_base" data-name="Nose base"><path class="cls-11" d="M554.32,326.51s11.82,0,16.19-1.42,17.49-29.8,5.83-29.8-36.45-4.22-36.45-4.22l14.42,35.44" transform="translate(-137 -195.88)"/><path class="cls-6" d="M586.55,269.74s20.41-9.93,19-17,1.46-4.26,1.46-4.26l2.92-2.84s2.92,21.29,0,24.13,5.83,17-7.29,15.61-5.83,2.84-7.29,0" transform="translate(-137 -195.88)"/></g><g id="Ear_left" data-name="Ear left"><path class="cls-6" d="M507.82,259.37s1.46-22.28-2.92-23.7l-4.37-1.42v4.26s-2.92-2.84-2.92,0c0,0,4.37,7.1,2.92,9.93s-4,22.81-7.82,24.18,7.82-4.31,7.82-4.31" transform="translate(-137 -195.88)"/></g><path id="Nose" class="cls-10" d="M557.07,294.32s20.26-1.19-1.37,32c0,0-24.83,3-44.84-1.81,0,0-21.14-30.94-.88-32.13S521.46,286.87,557.07,294.32Z" transform="translate(-137 -195.88)"/><g id="Eyes"><ellipse class="cls-12" cx="370.82" cy="85.21" rx="4.37" ry="4.26"/><ellipse class="cls-12" cx="428.41" cy="88.76" rx="5.1" ry="4.97"/></g><g id="Noseholes"><ellipse class="cls-12" cx="381.76" cy="112.88" rx="6.56" ry="10.64"/><ellipse class="cls-12" cx="406.54" cy="112.88" rx="6.56" ry="10.64"/></g></g></g></svg>
 
@@ -28,16 +28,37 @@
 			</script>
 			<!-- end example -->
 		</div>
-
+		<div id="sidebar-container">
+			<div id="players-online">
+				<div id="player-count">
+					Online Players: <span id="onlinePlayers">0</span>
+				</div>
+				Noone !
+			</div>
+			<div id="player-tools">
+				<label for="guessInput">Enter a letter</label>
+				<input id="guessInput" type="text" maxlength="1">
+				<button id="guess-submit">Submit</button>
+				<div id="game-message" class="space"></div>
+				<div id="user-guesses" class="space"></div>
+				<label for="usernameInput">Change Your Name</label>
+				<input id="usernameInput" type="text" maxlength="15">
+				<button id="username-submit">Submit</button>
+			</div>
+		</div>
+	</div>
+	<div id="bottomPanel">
 		<div id="secret-word-container"></div><br>
-		<label for="guessInput">Enter a letter</label>
-		<input id="guessInput" type="text" maxlength="1">
-		<button id="guess-submit">Submit</button>
-		<div id="game-message" class="space"></div>
-		<div id="user-guesses" class="space"></div>
-		<label for="usernameInput">Change Your Name</label>
-		<input id="usernameInput" type="text" maxlength="15">
-		<button id="username-submit">Submit</button>
+		<div id="secret-word-container-style">
+			<span class="guess-letter-1">A</span>
+			<span class="guess-letter-2">R</span>
+			<span class="guess-letter-3">B</span>
+			<span class="guess-letter-4">_</span>
+			<span class="guess-letter-5">R</span>
+			<span class="guess-letter-5">_</span>
+			<span class="guess-letter-6">_</span>
+		</div>
+		
 	</div>
 	<script src="bundle.js"></script>
 </body>

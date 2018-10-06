@@ -1,39 +1,41 @@
 @import '_variables.scss'; //how you get access to variables
-@import '_pig.scss'; // CSS for pig
-h1{
-  color: $headerColor; //this make it easy to change colors through your whole site
+// Components 
+@import '_hangman.scss'; // CSS for pig/hangman
+@import '_secretwords.scss';
+@import '_logo.scss';
+
+// Positioning, universal styles, and general SCSS
+
+html {
+  height: 100%;
 }
-
-#game-view-container{
-  #game-view{
-    max-width: 200px;
-  }
-
-  #hangman-svg {
-    max-width:60%;
-    display:block;
-  }
-}
-
 body{
-    max-width:1000px;
     margin:0 auto;
-    width:60%;
-    height:100px;
+    height:100%;
     text-align:center;
     background-color:#ccc;
 }
 
+#game-view-container{
+  height: 75%;
+}
+
+#bottom-panel {
+  height:20%;
+  overflow:hidden;
+}
+
+#sidebar-container{
+  float: right;
+  width: 50%;
+  text-align: right;
+}
 h1{
 	margin:auto;
     line-height:4.5rem;
     vertical-align:middle;
   font-family: 'Anton', sans-serif;
   font-size: 3rem;
-}
-
-.space{
-	padding: 4px 0px;
 }
 
 .error{
@@ -46,31 +48,5 @@ h1{
 
 .correct{
 	color:#10a800;
-}
-
-#secret-word-container{
-	font-size:23px;
-}
-
-
-#logo {
-  position: fixed;
-  left: 10px;
-  span {
-    display: inline;
-  }
-  .part-1 {
-    font-size:2rem;
-    color: #bd6161;
-  }
-  .part-2 {
-    font-size:2.5rem;
-    color: #5b5bba;
-  }
-  .part-3 {
-    margin-top: -105px;
-    display: block;
-    font-size:3.05rem;
-  }
 }
 
