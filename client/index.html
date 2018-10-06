@@ -30,6 +30,14 @@
 		</div>
 		<div id="sidebar-container">
 			<div id="players-online">
+				<div id="player-profile">
+					<a href="#" data-target="player-profile-dropdown"><img id="profile-pig-icon" src="assets/img/profilePig.svg" /></a>
+					<div id="player-profile-dropdown">
+						<label for="usernameInput">Change Your Name</label>
+						<input id="usernameInput" type="text" maxlength="15">
+						<button id="username-submit">Submit</button>
+					</div>
+				</div>
 				<div id="player-count">
 					Online Players: <span id="onlinePlayers">0</span>
 				</div>
@@ -41,9 +49,6 @@
 				<button id="guess-submit">Submit</button>
 				<div id="game-message" class="space"></div>
 				<div id="user-guesses" class="space"></div>
-				<label for="usernameInput">Change Your Name</label>
-				<input id="usernameInput" type="text" maxlength="15">
-				<button id="username-submit">Submit</button>
 			</div>
 		</div>
 	</div>

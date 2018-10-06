@@ -36,6 +36,7 @@ function submitGuess(letter) {
 
 function updateGameState(data) {
 	secretWord.innerHTML = data.blankword;
+	console.log(data);
 	userGuesses.innerHTML = 'Guesses: ' + data.guesses;
 }
 

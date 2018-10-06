@@ -33,6 +33,14 @@ body{
   float: right;
   width: 50%;
   text-align: right;
+
+  #profile-pig-icon {
+    width: 24px;
+    height: 24px;
+  }
+  #player-profile-dropdown {
+    display: none;
+  }
 }
 h1{
 	margin:auto;
