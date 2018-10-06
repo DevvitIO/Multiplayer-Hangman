@@ -1,5 +1,5 @@
 @import '_variables.scss'; //how you get access to variables
-
+@import '_pig.scss'; // CSS for pig
 h1{
   color: $headerColor; //this make it easy to change colors through your whole site
 }
@@ -7,6 +7,11 @@ h1{
 #game-view-container{
   #game-view{
     max-width: 200px;
+  }
+
+  #hangman-svg {
+    max-width:60%;
+    display:block;
   }
 }
 
@@ -16,6 +21,7 @@ body{
     width:60%;
     height:100px;
     text-align:center;
+    background-color:#ccc;
 }
 
 h1{
@@ -68,26 +74,3 @@ h1{
   }
 }
 
-@-webkit-keyframes swinging{
-    0%{-webkit-transform: rotate(2deg);}
-    50%{-webkit-transform: rotate(-1deg)}
-    100%{-webkit-transform: rotate(2deg);}
-}
- 
-@keyframes swinging{
-    0%{transform: rotate(2deg);}
-    50%{transform: rotate(-1deg)}
-    100%{transform: rotate(2deg);}
-}
- 
-#Right_Arm, #Head, #Right_leg, #Torso, #Left_Leg{
-    -webkit-transform-origin: 50% 0;
-    transform-origin: 50% 0;
-    -webkit-animation: swinging 3.5s ease-in-out forwards infinite;
-    animation: swinging 3.5s ease-in-out forwards infinite;
-}
-
-#hangman-svg {
-  max-width: 500px;
-  margin-top: 100px;
-}
