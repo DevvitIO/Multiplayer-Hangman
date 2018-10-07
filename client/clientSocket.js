@@ -52,6 +52,11 @@ socket.on('repeatGuess', (data) => {
 	gameMessage.innerHTML = "That letter has already been guessed!";
 });
 
+socket.on('invalidCharacter', (data) => {
+	gameMessage.innerHTML = "That letter has invalid";
+});
+
+
 socket.on('incorrectGuess', (data) => {
 	updateGameState(data);
 	gameMessage.innerHTML = data.guesser + ' guessed incorrectly. There are ' + (6 - data.incorrect) + ' guesses left.';
