@@ -18,4 +18,3 @@ During development Nodemon starts the `server` and watches for file changes. The
 - `git clone https://github.com/DevvitIO/Multiplayer-Hangman.git` (clone the project to your local machine)
 - `npm install` (navigate into the project's root directory)
 - `npm start`
-

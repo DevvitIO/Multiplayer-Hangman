@@ -1,0 +1,32 @@
+#hangman-container {    
+  float: left;
+  height: 100%;
+  padding-left: 50px;
+  padding-top:10px;
+}
+
+@-webkit-keyframes swinging{
+    0%{-webkit-transform: rotate(2deg);}
+    50%{-webkit-transform: rotate(-1deg)}
+    100%{-webkit-transform: rotate(2deg);}
+}
+ 
+@keyframes swinging{
+    0%{transform: rotate(2deg);}
+    50%{transform: rotate(-1deg)}
+    100%{transform: rotate(2deg);}
+}
+ 
+#Right_Arm, #Head, #Right_leg, #Left_Arm, #Torso, #Left_Leg{
+    display: none;
+    -webkit-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+    -webkit-animation: swinging 3.5s ease-in-out forwards infinite;
+    animation: swinging 3.5s ease-in-out forwards infinite;
+}
+
+
+#hangman-svg {
+  max-width: 500px;
+  height: 100%;
+}

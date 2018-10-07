@@ -1,33 +1,53 @@
 @import '_variables.scss'; //how you get access to variables
+// Components 
+@import '_hangman.scss'; // CSS for pig/hangman
+@import '_secretwords.scss';
+@import '_logo.scss';
 
-h1{
-  color: $headerColor; //this make it easy to change colors through your whole site
+// Positioning, universal styles, and general SCSS
+
+html {
+  height: 100%;
+}
+body{
+    margin:0 auto;
+    height:100%;
+    text-align:center;
+    background-color: $backgroundColour;
+    color: $generalFontColour;
 }
 
 #game-view-container{
-  #game-view{
-    max-width: 200px;
+  height: 75%;
+}
+
+#bottom-panel {
+  height:20%;
+  position: fixed;
+  bottom:0;
+  width: 100%;
+  background-color: $bottomPanelColour1;
+}
+
+#sidebar-container{
+  float: right;
+  width: 50%;
+  text-align: right;
+
+  #profile-pig-icon {
+    width: 24px;
+    height: 24px;
+  }
+  #player-profile-dropdown {
+    display: none;
   }
 }
-
-body{
-    max-width:1000px;
-    margin:0 auto;
-    width:60%;
-    height:100px;
-    text-align:center;
-}
-
 h1{
 	margin:auto;
     line-height:4.5rem;
     vertical-align:middle;
   font-family: 'Anton', sans-serif;
   font-size: 3rem;
-}
-
-.space{
-	padding: 4px 0px;
 }
 
 .error{
@@ -42,52 +62,3 @@ h1{
 	color:#10a800;
 }
 
-#secret-word-container{
-	font-size:23px;
-}
-
-
-#logo {
-  position: fixed;
-  left: 10px;
-  span {
-    display: inline;
-  }
-  .part-1 {
-    font-size:2rem;
-    color: #bd6161;
-  }
-  .part-2 {
-    font-size:2.5rem;
-    color: #5b5bba;
-  }
-  .part-3 {
-    margin-top: -105px;
-    display: block;
-    font-size:3.05rem;
-  }
-}
-
-@-webkit-keyframes swinging{
-    0%{-webkit-transform: rotate(2deg);}
-    50%{-webkit-transform: rotate(-1deg)}
-    100%{-webkit-transform: rotate(2deg);}
-}
- 
-@keyframes swinging{
-    0%{transform: rotate(2deg);}
-    50%{transform: rotate(-1deg)}
-    100%{transform: rotate(2deg);}
-}
- 
-#Right_Arm, #Head, #Right_leg, #Torso, #Left_Leg{
-    -webkit-transform-origin: 50% 0;
-    transform-origin: 50% 0;
-    -webkit-animation: swinging 3.5s ease-in-out forwards infinite;
-    animation: swinging 3.5s ease-in-out forwards infinite;
-}
-
-#hangman-svg {
-  max-width: 500px;
-  margin-top: 100px;
-}

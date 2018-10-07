@@ -36,6 +36,7 @@ function submitGuess(letter) {
 
 function updateGameState(data) {
 	secretWord.innerHTML = data.blankword;
+	console.log(data);
 	userGuesses.innerHTML = 'Guesses: ' + data.guesses;
 }
 
@@ -50,6 +51,11 @@ socket.on('gameInformation', (data) => {
 socket.on('repeatGuess', (data) => {
 	gameMessage.innerHTML = "That letter has already been guessed!";
 });
+
+socket.on('invalidCharacter', (data) => {
+	gameMessage.innerHTML = "That letter has invalid";
+});
+
 
 socket.on('incorrectGuess', (data) => {
 	updateGameState(data);
