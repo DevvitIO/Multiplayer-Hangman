@@ -1,5 +1,7 @@
 var io = require("socket.io-client");
 var socket = io('http://localhost:5000');
+var clientGame = require('./clientGame.js').clientGame;
+var game = null;
 
 let gameMessage = document.getElementById('game-message');
 let secretWord = document.getElementById('secret-word-container');
@@ -19,11 +21,11 @@ usernameSubmit.addEventListener('click', function(){
     setUsername(usernameInput.value);
 });
 
-function setUsername(username) {
+export function setUsername(username) {
 	socket.emit('setUsername', username);
 }
 
-function submitGuess(letter) {
+export function submitGuess(letter) {
 	let guessFound = userGuesses.innerHTML.split(',').find((guess) => {
       return guess === letter;
     });
@@ -34,9 +36,9 @@ function submitGuess(letter) {
 	socket.emit('newGuess', letter);
 }
 
-function updateGameState(data) {
+export function updateGameState(data) {
 	secretWord.innerHTML = data.blankword;
-	console.log(data);
+	// console.log(data);
 	userGuesses.innerHTML = 'Guesses: ' + data.guesses;
 }
 
@@ -45,6 +47,7 @@ socket.on('playersOnline', function(count){
 });
 
 socket.on('gameInformation', (data) => {
+	game = new clientGame(data.incorrect, data);
 	updateGameState(data);
 });
 
@@ -58,12 +61,15 @@ socket.on('invalidCharacter', (data) => {
 
 
 socket.on('incorrectGuess', (data) => {
-	updateGameState(data);
+	game.gameStateUpdate(data);
+	// updateGameState(data);
 	gameMessage.innerHTML = data.guesser + ' guessed incorrectly. There are ' + (6 - data.incorrect) + ' guesses left.';
+	game.revealPart();
 });
 
 socket.on('correctGuess', (data) => {
-	updateGameState(data);
+	game.gameStateUpdate(data);
+	// updateGameState(data);
 	gameMessage.innerHTML = data.guesser + ' guessed correctly!';
 });
 
@@ -77,10 +83,12 @@ socket.on('gameOver', (data) => {
 	guessSubmit.disabled = true;
 	updateGameState(data);
 	gameMessage.innerHTML = '<span style="color: red">' + data.guesser + ' guessed wrong. Game Over!</span>';
+	game.revealPart();
 });
 
 socket.on('newGame', (data) => {
 	guessSubmit.disabled = false;
 	updateGameState(data);
 	gameMessage.innerHTML = 'New game has started!';
+	game.reset();
 });

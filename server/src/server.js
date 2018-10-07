@@ -24,6 +24,9 @@ export class Server {
     var game = new Game();
     var onlinePlayers = 0;
     this.io.on('connection', function(socket){
+      socket.on('testres', function(){
+        console.log('testestestes');
+      });
       onlinePlayers++;
       socket.emit('gameInformation', game.getState());
       socket.emit('playersOnline', onlinePlayers);
