@@ -40,7 +40,7 @@ export class Server {
       });
 
       socket.on('newGuess', function(letter){
-        let guess = game.newGuess(letter);
+        let guess = game.newGuess(letter.toLowerCase());
         socket.emit(guess, game.getState(socket.username));
         socket.broadcast.emit(guess, game.getState(socket.username));
         //On gameOver or Victory, a new game will be created after 5 seconds
