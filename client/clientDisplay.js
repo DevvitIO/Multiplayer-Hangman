@@ -7,6 +7,7 @@ export class clientDisplay {
         //These DOM calls are temporary, as we will be switching to data-targets!
         this.gameMessage = document.getElementById('game-message');
         this.secretWord = document.getElementById('secret-word-container');
+        this.testt = document.getElementById('secret-word-container-style');
         this.userGuesses = document.getElementById('user-guesses');
         this.onlinePlayers = document.getElementById('onlinePlayers');
         this.guessInput = document.getElementById('guessInput');
@@ -17,15 +18,26 @@ export class clientDisplay {
     }
 
     initDisplay(gameState) {
-        console.log('Display initialized.');
         this.secretWord.innerHTML = gameState.blankword;
         this.userGuesses.innerHTML = gameState.guesses;
-        console.log(gameState);
+
+        //Updates styled Mystery Word
+        var secretWordContainer = this.testt;
+        this.testt.innerHTML = '';
+        gameState.blankword.split(' ').forEach(function(l){
+            secretWordContainer.innerHTML += '<span class="guess-letter">' + l.toUpperCase() + '</span>';
+        });
+        console.log('Display initialized.');
     }
 
     //Guess will be incorrect, correct, or invalid
     newGuess(data, guess) {
         this.secretWord.innerHTML = data.blankword;
+        var secretWordContainer = this.testt;
+        this.testt.innerHTML = '';
+        data.blankword.split(' ').forEach(function(l){
+            secretWordContainer.innerHTML += '<span class="guess-letter">' + l.toUpperCase() + '</span>';
+        });
         this.userGuesses.innerHTML = 'Guesses: ' + data.guesses;
         console.log(data);
         if(guess == 'incorrect'){
@@ -34,10 +46,6 @@ export class clientDisplay {
             this.gameMessage.innerHTML = data.guesser + ' guessed correctly!';
         } else if(guess == 'invalid'){
             this.gameMessage.innerHTML = "That is not a valid character to guess, or has already been guessed!";
-        } else{
-            console.log(data);
-            console.log('=-=====================');
-            console.log(guess);
         }
     }
 
@@ -53,7 +61,12 @@ export class clientDisplay {
         } else if(status === 'newGame'){
             this.guessSubmit.disabled = false;
             this.gameMessage.innerHTML = 'New game has started!';
-        }  
+        }
+        var secretWordContainer = this.testt;
+        this.testt.innerHTML = '';
+        data.blankword.split(' ').forEach(function(l){
+            secretWordContainer.innerHTML += '<span class="guess-letter">' + l.toUpperCase() + '</span>';
+        });
     }
 
 }
