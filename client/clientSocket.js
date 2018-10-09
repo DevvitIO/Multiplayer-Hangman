@@ -1,43 +1,35 @@
 var io = require("socket.io-client");
 var socket = io('http://localhost:5000');
+var clientGame = require('./clientGame.js').clientGame;
+var game = null;
+var onlinePlayers = document.getElementById('onlinePlayers');
 
-let gameMessage = document.getElementById('game-message');
-let secretWord = document.getElementById('secret-word-container');
-let userGuesses = document.getElementById('user-guesses');
-let onlinePlayers = document.getElementById('onlinePlayers');
-let guessInput = document.getElementById('guessInput');
-let usernameInput = document.getElementById('usernameInput');
-let guessSubmit = document.getElementById('guess-submit');
-let usernameSubmit = document.getElementById('username-submit');
+var guessSubmit = document.getElementById('guess-submit');
+        var guessInput = document.getElementById('guessInput');
+        guessSubmit.addEventListener('click', function(){
+            submitGuess(guessInput.value);
+            guessInput.value = '';
+        });
 
-guessSubmit.addEventListener('click', function(){
-    submitGuess(guessInput.value);
-    guessInput.value = '';
-});
-
-usernameSubmit.addEventListener('click', function(){
-    setUsername(usernameInput.value);
-});
-
-function setUsername(username) {
+export function setUsername(username) {
 	socket.emit('setUsername', username);
 }
 
-function submitGuess(letter) {
-	let guessFound = userGuesses.innerHTML.split(',').find((guess) => {
-      return guess === letter;
-    });
-    if(guessFound === letter){
-    	gameMessage.innerHTML = "That letter has already been guessed!";
-    	return;
-    }
-	socket.emit('newGuess', letter);
-}
-
-function updateGameState(data) {
-	secretWord.innerHTML = data.blankword;
-	console.log(data);
-	userGuesses.innerHTML = 'Guesses: ' + data.guesses;
+export function submitGuess(letter) {
+	if(/^[a-zA-Z]*$/.test(letter) === true && letter != ''){
+		let guessFound = game.gameState.guesses.find((guess) => {
+	      return guess === letter;
+	    });
+	    if(guessFound === letter){
+	    	game.invalidGuess();
+	    	return;
+	    }
+		socket.emit('newGuess', letter);
+	} else if(/^[a-zA-Z]*$/.test(letter) === false || letter == ''){
+		game.invalidGuess();
+		return;
+	}
+	
 }
 
 socket.on('playersOnline', function(count){
@@ -45,42 +37,34 @@ socket.on('playersOnline', function(count){
 });
 
 socket.on('gameInformation', (data) => {
-	updateGameState(data);
+	game = new clientGame(data); //passing data allows correct rendering of current games hangman
 });
 
 socket.on('repeatGuess', (data) => {
-	gameMessage.innerHTML = "That letter has already been guessed!";
+	game.invalidGuess();
 });
 
 socket.on('invalidCharacter', (data) => {
-	gameMessage.innerHTML = "That letter has invalid";
+	game.invalidGuess();
 });
 
 
 socket.on('incorrectGuess', (data) => {
-	updateGameState(data);
-	gameMessage.innerHTML = data.guesser + ' guessed incorrectly. There are ' + (6 - data.incorrect) + ' guesses left.';
+	game.incorrectGuess(data);
 });
 
 socket.on('correctGuess', (data) => {
-	updateGameState(data);
-	gameMessage.innerHTML = data.guesser + ' guessed correctly!';
+	game.correctGuess(data);
 });
 
 socket.on('victory', (data) => {
-	guessSubmit.disabled = true;
-	updateGameState(data);
-	gameMessage.innerHTML = '<span style="color: green">' + data.guesser + ' guessed correctly to win the game! Victory!</span>';
+	game.victory(data);
 });
 
 socket.on('gameOver', (data) => {
-	guessSubmit.disabled = true;
-	updateGameState(data);
-	gameMessage.innerHTML = '<span style="color: red">' + data.guesser + ' guessed wrong. Game Over!</span>';
+	game.gameOver(data);
 });
 
 socket.on('newGame', (data) => {
-	guessSubmit.disabled = false;
-	updateGameState(data);
-	gameMessage.innerHTML = 'New game has started!';
+	game.newGame(data);
 });

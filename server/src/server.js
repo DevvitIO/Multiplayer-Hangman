@@ -24,6 +24,9 @@ export class Server {
     var game = new Game();
     var onlinePlayers = 0;
     this.io.on('connection', function(socket){
+      socket.on('testres', function(){
+        console.log('testestestes');
+      });
       onlinePlayers++;
       socket.emit('gameInformation', game.getState());
       socket.emit('playersOnline', onlinePlayers);
@@ -37,7 +40,7 @@ export class Server {
       });
 
       socket.on('newGuess', function(letter){
-        let guess = game.newGuess(letter);
+        let guess = game.newGuess(letter.toLowerCase());
         socket.emit(guess, game.getState(socket.username));
         socket.broadcast.emit(guess, game.getState(socket.username));
         //On gameOver or Victory, a new game will be created after 5 seconds
