@@ -11,5 +11,6 @@ out
 /public/assets/uploads/*
 gen
 package-lock.json
+.vs/**/*
 
 /client/dist/**/*
