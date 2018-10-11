@@ -14,15 +14,19 @@ guessSubmit.addEventListener('click', function(){
 	guessInput.value = '';
 });
 // Initialize any special keypresses
-document.onkeydown = function(e){ // This isn't the right place for this, but since the guess submit events are hooked in here, and
-	if (e.keyCode == 13) {		  // the data isn't available elsewhere, it is temporarily here.
+document.onkeydown = function(e){ 
+	// This isn't the right place for this, but since the guess submit events are hooked in here, and
+	// the data isn't available elsewhere, it is temporarily here.
+	// May require a bit of extra handling to avoid double fires/unwanted behaviour
+	if (e.keyCode == 13) {		  
 		submitGuess();
 	}
-	var isLowercaseLetter = 65 < e.keyCode && e.keyCode < 90;
-	var isUppercaseLetter = 97 < e.keyCode && e.keyCode < 122;
-	if (isLowercaseLetter || isUppercaseLetter ) {
+	var isLowercaseLetter = 65 <= e.keyCode && e.keyCode <= 90; // Only lowercase seems to be necessary due to onkeydown
+	if (isLowercaseLetter) {
 		guessInput.value = e.key;
 	}
+
+	e.preventDefault();
 }; 
 
 export function setUsername(username) {
