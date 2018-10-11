@@ -5,16 +5,17 @@ export class clientDisplay {
     //Methods from this class are called from clientGame.js upon game-state changes.
     constructor(gameState) {
         //These DOM calls are temporary, as we will be switching to data-targets!
-        this.gameMessage = document.getElementById('game-message');
-        this.secretWord = document.getElementById('secret-word-container');
-        this.testt = document.getElementById('secret-word-container-style');
-        this.userGuesses = document.getElementById('user-guesses');
-        this.onlinePlayers = document.getElementById('onlinePlayers');
-        this.guessInput = document.getElementById('guessInput');
-        this.usernameInput = document.getElementById('usernameInput');
-        this.guessSubmit = document.getElementById('guess-submit');
-        this.usernameSubmit = document.getElementById('username-submit');
-        this.initDisplay(gameState);      
+        this.gameMessage = document.querySelectorAll('*[data-game-message]')[0]; // These indexes mean there's no flexibility for now, as we need to wrap
+        this.secretWord = document.querySelectorAll('*[data-secret-word-container]')[0]; // Used by the code to calculate, may as well be a variable.
+        this.testt = document.querySelectorAll('[data-secret-word-display]')[0]; // Visible to user
+        this.userGuesses = document.querySelectorAll('*[data-user-guesses]')[0];
+        this.onlinePlayers = document.querySelectorAll('*[data-online-players]')[0];
+        this.guessInput = document.querySelectorAll('*[data-guess-input]')[0];
+        this.usernameInput = document.querySelectorAll('*[data-username-input]')[0];
+        this.guessSubmit = document.querySelectorAll('*[data-guess-submit]')[0];
+        this.usernameSubmit = document.querySelectorAll('*[data-username-submit]')[0];
+        // this.secretWord = ""; // Don't think we need an HTML element when this will do. 
+        this.initDisplay(gameState);         
     }
 
     initDisplay(gameState) {

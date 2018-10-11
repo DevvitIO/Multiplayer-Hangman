@@ -22,7 +22,7 @@ $plank-svg-quadrenary: beige;
 */
 
 // Leaving this rule here to quickly make relevant parts visible
-// #hangman-svg * { display: block !important } // Override game rules for styling
+#hangman-svg * { display: block !important } // Override game rules for styling
 $post-primary: beige;
 $post-secondary: beige;
 $post-tertiary: beige;
@@ -31,7 +31,7 @@ $post-tertiary: beige;
 $rope-colour: black; 
 $pig-primary: #335599;
 $pig-secondary: #3388aa;
-$pig-quadrenary: #44aacc;
+$pig-quadrenary: #3399cc;
 $pig-quintenary: beige; // Alright now it's getting silly.
 
 /* Clouds */

@@ -20,9 +20,8 @@ export class clientGame {
                          ]; // Bodypart ID's, in order of reveal
         this.partIndex = gameInfo.incorrect;
         this.gameState = gameInfo;
-        this.loadGame();       
+        this.loadGame();
     }
-
 
 
     loadGame() {

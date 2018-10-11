@@ -28,10 +28,10 @@
 			
 			<!-- please feel free to replace, update, or change these -->
 
-
 			<!-- example cloud script -->
 			<script>
 				// Some reeeeal quick and bad code to move the background
+				// This should be done in CSS animations, not javascript : )
 				function doSomeClouds() {
 					let cloudsGroup1 = document.querySelectorAll('#Cloud_1, #Cloud_4');
 					for (let cloud of cloudsGroup1) { 
@@ -42,19 +42,6 @@
 						cloud.style.transform = "translateX(50%)";
 					};
 				}
-				function doSomeSunBeams() {
-					let sunBeams = document.querySelectorAll('#Beams_1, #Beams_2, #Beams_3, #Beams_4');
-					var cn = 0
-				for (let beams of sunBeams) {
-						if ( 2 % cn == 0) {
-							beam.style.transform = "scale(1.2)";
-						} else {
-							beam.style.transform = "scale(0.8)";
-						}
-						cn += 1;
-					}
-				}
-				setInterval(doSomeSunBeams, 1000);
 				setTimeout(doSomeClouds, 500);
 			</script>
 		</div>
@@ -69,28 +56,29 @@
 					</div>
 				</div>
 				<div id="player-count">
-					Online Players: <span id="onlinePlayers">0</span>
+					Online Players: <span id="onlinePlayers" data-online-players>0</span>
 				</div>
+				Noone !
 			</div>
 			<div id="player-tools">
-				<label for="guessInput">Enter a letter</label>
-				<input id="guessInput" type="text" maxlength="1">
-				<button id="guess-submit">Submit</button>
-				<div id="game-message" class="space"></div>
-				<div id="user-guesses" class="space"></div>
+				<label for="guessInput" >Enter a letter</label>
+				<input id="guessInput" data-guess-input type="text"  maxlength="1">
+				<button id="guess-submit" data-guess-submit>Submit</button>
+				<div id="game-message" data-game-message class="space"></div>
+				<div id="user-guesses" data-user-guesses class="space"></div>
 			</div>
 		</div>
 	</div>
 	<div id="bottom-panel">
-		<div id="secret-word-container"></div><br>
-		<div id="secret-word-container-style">
-			<span class="guess-letter">A</span>
-			<span class="guess-letter">R</span>
-			<span class="guess-letter">B</span>
-			<span class="guess-letter">_</span>
-			<span class="guess-letter">R</span>
-			<span class="guess-letter">_</span>
-			<span class="guess-letter">_</span>
+		<div id="secret-word-container" data-secret-word-container></div><br>
+		<div id="secret-word-container-style" data-secret-word-display>
+			<span class="guess-letter-1">A</span>
+			<span class="guess-letter-2">R</span>
+			<span class="guess-letter-3">B</span>
+			<span class="guess-letter-4">_</span>
+			<span class="guess-letter-5">R</span>
+			<span class="guess-letter-5">_</span>
+			<span class="guess-letter-6">_</span>
 		</div>
 		
 	</div>
