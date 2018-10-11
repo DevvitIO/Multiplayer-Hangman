@@ -23,44 +23,32 @@ https://discordapp.com/invite/erPjG7C
 
 1. Clone the repository, and go fork yourself.
 
-2. Pick an issue from the list or ask if there's anything to do.
+2. Pick an issue from the list OR come and ask one of us what you can help with
 
 3. Use your awesome coding skills to add features or fix bugs!
+
+## Contributing Requirements
+* You will need to be assigned a task before you can start working on any issues. Discord is generally a good way to go about this at the moment
+* Readability is key. If you find it's getting too long, separate it out
+* Flexibility: Make a "popWindow()" function, don't cross game logic with animation directly, and so on
+* Feedback is great - if you had difficulties, didn't understand something, or any other issues let us know
 
 ## Running the project
 In console:
 ````
 git clone https://github.com/DevvitIO/Multiplayer-Hangman.git
 npm install
-npm start //will run webpack-dev-server, rebuilding the site when changes are made to any of the files.
-navigate browser to http://localhost:3000/
+npm start // will run webpack-dev-server, rebuilding the site when changes are made to any of the files.
+
+// If it doesn't open automatically from npm start, then
+// navigate browser to http://localhost:3000/
 ````
 If installation turns out to be more complicated than this, that is completely our fault and please do let us know. 
 
-## Contributing Requirements
-* Readability is key. If you find it's getting too long, separate it out
-* Flexibility: Make a "popWindow()" function, don't cross game logic with animation directly, and so on
-* You will need to be assigned a task before you can start working on any issues. Discord is generally a good way to go about this at the moment
 
 ## Seeking help
 
 We're available on discord, or you can post a specific issue in the issues list here. We like questions!
-
-## MANDATORY RULES
-
-* If you get task assigned and you've been absent for a while on a critical part of the project, someone else will do it in your stead.
-
-## Sidenotes
-
-The project layout is simple for now, but feel free to extend the javascript/stylesheets into separate elements where it makes sense.
-
-### Front end developers:
-
-You'll find everything you need in the /client folder - scss, html, and the client.js which, surprisingly, runs on the client's device.
-
-### Back end development:
-
-Server.js contains the back end code. 
 
 
 # If you want to...
@@ -87,7 +75,7 @@ client/assets/_secretwords.scss
 
 ## Make some swanky animations for the letters...
 
-client/clientDisplay
+client/clientDisplay.js
 
 ## Animate/Style the hangman...
 
