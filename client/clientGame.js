@@ -11,73 +11,54 @@ export class clientGame {
     // - does someone working on the logic have to understand the networking?
     // - Same applies to graphical effects and logic
     constructor(gameInfo) {
-        this.bodyParts = ['Head',
-                          'Torso', 
-                          'Right_Arm', 
-                          'Left_Arm', 
-                          'Right_leg', 
-                          'Left_Leg'
-                         ]; // Bodypart ID's, in order of reveal
-        this.partIndex = gameInfo.incorrect;
         this.gameState = gameInfo;
+        this.display = new clientDisplay(this.gameState);
+        
         this.loadGame();
     }
 
-
+    setDisplay(function_name){
+        // Use to run any display functions. Passes an up to date copy of gameState.
+        this.display.gameState = this.gameState;
+        this.display[function_name]();
+    }
+    
     loadGame() {
         //Initializes clientDisplay
-        display = new clientDisplay(this.gameState);
-        //Loads hangman model accordingly to game state when you load the page
-        if(this.partIndex === 0) return;
-        for(var i = 0; i < this.partIndex; i++){
-            var currentPartID = this.bodyParts[i];
-            var currentPartElem = document.getElementById(currentPartID);
-            currentPartElem.style.opacity = "0";
-        }
-    }
-
-    revealPart() { 
-        var currentPartID = this.bodyParts[this.partIndex];
-        var currentPartElem = document.getElementById(currentPartID);
-        currentPartElem.style.opacity = "1"; // This function should live in clientDisplay
-        this.partIndex += 1;
+        this.display.partIndex = this.gameState.incorrect; // Tell display to render parts based on failed guesses
+        this.setDisplay('loadGame');
     }
 
     reset() { 
-        this.partIndex = 0;
-        for (let part of this.bodyParts) {
-            let partElem = document.getElementById(part);
-            console.log(partElem);
-            partElem.style.opacity = "0"; // This function should live in clientDisplay
-        }
+        this.setDisplay('reset');
     }
 
     incorrectGuess(data) {
         this.gameState = data;
-        display.newGuess(data, 'incorrect');
-        this.revealPart();
+        this.display.newGuess(data, 'incorrect');
+        this.setDisplay('revealPart');
     }
 
     correctGuess(data) {
         this.gameState = data;
-        display.newGuess(data, 'correct');
+        this.display.newGuess(data, 'correct');
     }
 
     invalidGuess() {
-        display.newGuess(this.gameState, 'invalid');
+        this.display.newGuess(this.gameState, 'invalid');
     }
 
     gameOver(data) {
-        this.revealPart();
-        display.endGame(data, 'gameOver');
+        this.setDisplay('reset');
+        this.display.endGame(data, 'gameOver');
     }
 
     victory(data) {
-        display.endGame(data, 'victory');
+        this.display.endGame(data, 'victory');
     }
 
     newGame(data) {
-        display.endGame(data, 'newGame');
+        this.display.endGame(data, 'newGame');
         this.reset();
         this.gameState = data;
     }

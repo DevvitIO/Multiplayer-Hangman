@@ -14,18 +14,27 @@ export class clientDisplay {
         this.usernameInput = document.querySelectorAll('*[data-username-input]')[0];
         this.guessSubmit = document.querySelectorAll('*[data-guess-submit]')[0];
         this.usernameSubmit = document.querySelectorAll('*[data-username-submit]')[0];
+        this.bodyParts = ['Head',
+                          'Torso', 
+                          'Right_Arm', 
+                          'Left_Arm', 
+                          'Right_leg', 
+                          'Left_Leg'
+                         ]; // Bodypart ID's, in order of reveal
         // this.secretWord = ""; // Don't think we need an HTML element when this will do. 
-        this.initDisplay(gameState);         
+        this.gameState = gameState;
+        this.initDisplay();         
     }
 
     initDisplay(gameState) {
-        this.secretWord.innerHTML = gameState.blankword;
-        this.userGuesses.innerHTML = gameState.guesses;
+        console.log(gameState);
+        this.secretWord.innerHTML = this.gameState.blankword;
+        this.userGuesses.innerHTML = this.gameState.guesses;
 
         //Updates styled Mystery Word
         var secretWordContainer = this.testt;
         this.testt.innerHTML = '';
-        gameState.blankword.split(' ').forEach(function(l){
+        this.gameState.blankword.split(' ').forEach(function(l){
             secretWordContainer.innerHTML += '<span class="guess-letter">' + l.toUpperCase() + '</span>';
         });
         console.log('Display initialized.');
@@ -68,6 +77,32 @@ export class clientDisplay {
         data.blankword.split(' ').forEach(function(l){
             secretWordContainer.innerHTML += '<span class="guess-letter">' + l.toUpperCase() + '</span>';
         });
+    }
+
+    revealPart() { 
+        var currentPartID = this.bodyParts[this.gameState.incorrect -1];
+        var currentPartElem = document.getElementById(currentPartID);
+        currentPartElem.style.opacity = "1"; // This function should live in clientDisplay
+    }
+
+    loadGame(guessStage) {
+        //Loads hangman model accordingly to game state when you load the page
+        var incorrectGuesses = this.gameState.incorrect;
+        if(incorrectGuesses === 0) return;
+        for(var i = 0; i < incorrectGuesses-1; i++){
+            var currentPartID = this.bodyParts[i];
+            var currentPartElem = document.getElementById(currentPartID);
+            currentPartElem.style.opacity = "0";
+        }
+    }
+
+    reset() {
+        // Reset the game 
+        console.log(this.gameState.incorrect);
+        for (let part of this.bodyParts) {
+            let partElem = document.getElementById(part);
+            partElem.style.opacity = "0"; // This function should live in clientDisplay
+        }
     }
 
 }
