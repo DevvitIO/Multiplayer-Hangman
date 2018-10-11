@@ -2,26 +2,28 @@ var io = require("socket.io-client");
 var socket = io('http://localhost:5000');
 var clientGame = require('./clientGame.js').clientGame;
 var game = null;
-var onlinePlayers = document.querySelectorAll('*[data-online-players]')[0];
 
+// We should move all of this ! We may need to pass a socket instance to the game if the reason this is here is 
+// down to the fact that data doesn't flow from clientGame to clientSocket ( i.e a simple example, to pass the letter guess to here )
+var onlinePlayers = document.querySelectorAll('*[data-online-players]')[0];
 var guessSubmit = document.querySelectorAll('*[data-guess-submit]')[0];
-		var guessInput = document.querySelectorAll('[data-guess-input]')[0];
-		console.log(guessInput);
-        guessSubmit.addEventListener('click', function(){
-            submitGuess(guessInput.value);
-            guessInput.value = '';
-		});
-		// Initialize any special keypresses
-		document.onkeydown = function(e){ // This isn't the right place for this, but since the guess submit events are hooked in here, and
-            if (e.keyCode == 13) {		  // the data isn't available elsewhere, it is temporarily here.
-                submitGuess();
-			}
-			var isLowercaseLetter = 65 < e.keyCode && e.keyCode < 90;
-			var isUppercaseLetter = 97 < e.keyCode && e.keyCode < 122;
-			if (isLowercaseLetter || isUppercaseLetter ) {
-				guessInput.value = e.key;
-			}
-        }; 
+var guessInput = document.querySelectorAll('[data-guess-input]')[0];
+console.log(guessInput);
+guessSubmit.addEventListener('click', function(){
+	submitGuess(guessInput.value);
+	guessInput.value = '';
+});
+// Initialize any special keypresses
+document.onkeydown = function(e){ // This isn't the right place for this, but since the guess submit events are hooked in here, and
+	if (e.keyCode == 13) {		  // the data isn't available elsewhere, it is temporarily here.
+		submitGuess();
+	}
+	var isLowercaseLetter = 65 < e.keyCode && e.keyCode < 90;
+	var isUppercaseLetter = 97 < e.keyCode && e.keyCode < 122;
+	if (isLowercaseLetter || isUppercaseLetter ) {
+		guessInput.value = e.key;
+	}
+}; 
 
 export function setUsername(username) {
 	socket.emit('setUsername', username);

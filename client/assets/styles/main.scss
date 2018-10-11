@@ -4,6 +4,7 @@
 @import '_secretwords.scss';
 @import '_logo.scss';
 @import '_svg_colours.scss';
+@import '_background.scss';
 
 // Positioning, universal styles, and general SCSS
 
@@ -64,32 +65,3 @@ h1{
 	color:#10a800;
 }
 
-#planks-background {
-  position: fixed;
-  left:-10%;
-  right: -10%;
-  width: 120%;
-  z-index:-1;
-  bottom: 20%;
-}
-
-#clouds-background {
-  position: fixed;
-  z-index:-2;
-  top:0;
-  right:0;
-  left:0;
-  bottom:0;
-  max-height: 200px;
-}
-
-// I'd add classes to these SVG items, but given they are prototypes it would have to be redone on edit
-#Cloud_1, #Cloud_2, #Cloud_3, #Cloud_4, #Cloud_5 {
-  transform: translateX(0%);
-  transition:all 60s ease;
-}
-
-#Beams_1, #Beams_2, #Beams_3, #Beams_4 {
-  transition: all 1s ease;
-  transform: scale(1);
-}
