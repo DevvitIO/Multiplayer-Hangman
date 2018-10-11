@@ -2,67 +2,68 @@
 // with the variables held in _variables.scss
 
 #planks-background {
-    .cls-1 {
-        fill: $plank-svg-primary;
-    }
-    .cls-2 {
-        fill: $plank-svg-secondary;
-    }
-    .cls-3 {
-        fill: $plank-svg-tertiary;
-    }
-    .cls-4 {
-        fill: $plank-svg-quadrenary;
-    }
+  .cls-1 {
+    fill: $plank-svg-primary;
+  }
+  .cls-2 {
+    fill: $plank-svg-secondary;
+  }
+  .cls-3 {
+    fill: $plank-svg-tertiary;
+  }
+  .cls-4 {
+    fill: $plank-svg-quadrenary;
+  }
 }
 
-
 #hangman-svg {
-    .cls-3 {
-        fill: $post-primary;
-    }
-    .cls-4 {
-        fill: $post-secondary;
-    }
-    .cls-5 {
-        fill: $post-tertiary;
-    }
+  .cls-3 {
+    fill: $post-primary;
+  }
+  .cls-4 {
+    fill: $post-secondary;
+  }
+  .cls-5 {
+    fill: $post-tertiary;
+  }
 
-    .cls-7, .cls-11 {
-        fill: $pig-primary;
-    }
+  .cls-7,
+  .cls-11 {
+    fill: $pig-primary;
+  }
 
-    .cls-13 {
-        fill: $pig-secondary;
-    }
+  .cls-13 {
+    fill: $pig-secondary;
+  }
 
-    .cls-17 {
-        fill: $pig-quadrenary;
-    }
+  .cls-17 {
+    fill: $pig-quadrenary;
+  }
 
-    .cls-9 {
-        fill: $pig-quintenary;
-    }
+  .cls-9 {
+    fill: $pig-quintenary;
+  }
 
-    .cls-6 {
-        fill: $rope-colour;
-    }
+  .cls-6 {
+    fill: $rope-colour;
+  }
 
-    #Lazy_way_of_making_the_frame_larger {
-        opacity: 0;
-    }
+  #Lazy_way_of_making_the_frame_larger {
+    opacity: 0;
+  }
 }
 
 #clouds-background {
-    .cls-1 {
-        fill: $sun-face-colour;
-    }
+  .cls-1 {
+    fill: $sun-face-colour;
+  }
 
-    .cls-2 {
-        fill: $sun-eye-colour;
-    }
+  .cls-2 {
+    fill: $sun-eye-colour;
+  }
 
-    .cls-4, .cls-7 {
-        fill: $cloud-colour;
-    }
+  .cls-4,
+  .cls-7 {
+    fill: $cloud-colour;
+  }
 }

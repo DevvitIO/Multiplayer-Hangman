@@ -1,5 +1,5 @@
 @import '_variables.scss'; //how you get access to variables
-// Components 
+// Components
 @import '_hangman.scss'; // CSS for pig/hangman
 @import '_secretwords.scss';
 @import '_logo.scss';
@@ -11,27 +11,27 @@
 html {
   height: 100%;
 }
-body{
-    margin:0 auto;
-    height:100%;
-    text-align:center;
-    background-color: $backgroundColour;
-    color: $generalFontColour;
+body {
+  margin: 0 auto;
+  height: 100%;
+  text-align: center;
+  background-color: $backgroundColour;
+  color: $generalFontColour;
 }
 
-#game-view-container{
+#game-view-container {
   height: 75%;
 }
 
 #bottom-panel {
-  height:20%;
+  height: 20%;
   position: fixed;
-  bottom:0;
+  bottom: 0;
   width: 100%;
   background-color: $bottomPanelColour1;
 }
 
-#sidebar-container{
+#sidebar-container {
   float: right;
   width: 50%;
   text-align: right;
@@ -45,23 +45,22 @@ body{
     display: none;
   }
 }
-h1{
-	margin:auto;
-    line-height:4.5rem;
-    vertical-align:middle;
+h1 {
+  margin: auto;
+  line-height: 4.5rem;
+  vertical-align: middle;
   font-family: 'Anton', sans-serif;
   font-size: 3rem;
 }
 
-.error{
-	color:red;
+.error {
+  color: red;
 }
 
-.warn{
-	color:#ffba60;
+.warn {
+  color: #ffba60;
 }
 
-.correct{
-	color:#10a800;
+.correct {
+  color: #10a800;
 }
-

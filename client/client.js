@@ -1,4 +1,4 @@
-import "./assets/styles/main.scss";
-import "./clientSocket.js";
-import "./clientGame.js";
-import "./clientDisplay.js";
+import './assets/styles/main.scss';
+import './clientSocket.js';
+import './clientGame.js';
+import './clientDisplay.js';
