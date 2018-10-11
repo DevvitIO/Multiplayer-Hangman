@@ -32,23 +32,23 @@ export class clientGame {
         for(var i = 0; i < this.partIndex; i++){
             var currentPartID = this.bodyParts[i];
             var currentPartElem = document.getElementById(currentPartID);
-            currentPartElem.style.display = "block";
+            currentPartElem.style.opacity = "0";
         }
     }
 
-    revealPart() {
+    revealPart() { 
         var currentPartID = this.bodyParts[this.partIndex];
         var currentPartElem = document.getElementById(currentPartID);
-        currentPartElem.style.display = "block"; // This should really bounce to another file dedicated to graphics
+        currentPartElem.style.opacity = "1"; // This function should live in clientDisplay
         this.partIndex += 1;
     }
 
-    reset() {
+    reset() { 
         this.partIndex = 0;
         for (let part of this.bodyParts) {
             let partElem = document.getElementById(part);
             console.log(partElem);
-            partElem.style.display = "none"; // Should bounce to display scripts
+            partElem.style.opacity = "0"; // This function should live in clientDisplay
         }
     }
 

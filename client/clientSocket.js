@@ -26,7 +26,6 @@ document.onkeydown = function(e){
 		guessInput.value = e.key;
 	}
 
-	e.preventDefault();
 }; 
 
 export function setUsername(username) {
