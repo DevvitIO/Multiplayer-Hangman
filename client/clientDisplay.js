@@ -14,7 +14,6 @@ export class clientDisplay {
     this.onlinePlayers = document.querySelectorAll('*[data-online-players]')[0];
     this.guessInput = document.querySelectorAll('*[data-guess-input]')[0];
     this.usernameInput = document.querySelectorAll('*[data-username-input]')[0];
-    this.guessSubmit = document.querySelectorAll('*[data-guess-submit]')[0];
     this.usernameSubmit = document.querySelectorAll(
       '*[data-username-submit]'
     )[0];
@@ -73,7 +72,6 @@ export class clientDisplay {
 
   //Status will be victory, gameOver, or newGame
   endGame(data, status) {
-    this.guessSubmit.disabled = true;
     this.secretWord.innerHTML = data.blankword;
     this.userGuesses.innerHTML = 'Guesses: ' + data.guesses;
     if (status === 'victory') {
@@ -87,7 +85,6 @@ export class clientDisplay {
         data.guesser +
         ' guessed wrong. Game Over!</span>';
     } else if (status === 'newGame') {
-      this.guessSubmit.disabled = false;
       this.gameMessage.innerHTML = 'New game has started!';
     }
     var secretWordContainer = this.testt;

@@ -36,13 +36,13 @@ export class clientGame {
     }
 
   reset() {
-    this.setDisplay('reset');
+    this.useDisplay('reset');
   }
 
   incorrectGuess(data) {
     this.gameState = data;
     this.display.newGuess(data, 'incorrect');
-    this.setDisplay('revealPart');
+    this.useDisplay('revealPart');
   }
 
   correctGuess(data) {
@@ -55,7 +55,7 @@ export class clientGame {
   }
 
   gameOver(data) {
-    this.setDisplay('reset');
+    this.useDisplay('reset');
     this.display.endGame(data, 'gameOver');
   }
 
