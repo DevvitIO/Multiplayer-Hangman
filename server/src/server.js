@@ -1,8 +1,8 @@
-const path = require("path");
-const express = require("express");
-const Game = require("./game.js").Game;
+const path = require('path');
+const express = require('express');
+const Game = require('./game.js').Game;
 
-const CLIENT_SOURCE = path.join(__dirname, "..", "..", "client", "dist");
+const CLIENT_SOURCE = path.join(__dirname, '..', '..', 'client', 'dist');
 
 export class Server {
   constructor() {
@@ -15,16 +15,16 @@ export class Server {
   }
 
   initRoutes() {
-    console.log("Initializing routes...");
-    this.app.use("/", express.static(CLIENT_SOURCE));
+    console.log('Initializing routes...');
+    this.app.use('/', express.static(CLIENT_SOURCE));
   }
 
   initGame() {
-    console.log("Initializing Game...");
+    console.log('Initializing Game...');
     var game = new Game();
     var onlinePlayers = 0;
-    this.io.on('connection', function(socket){
-      socket.on('testres', function(){
+    this.io.on('connection', function(socket) {
+      socket.on('testres', function() {
         console.log('testestestes');
       });
       onlinePlayers++;
@@ -33,27 +33,27 @@ export class Server {
       socket.broadcast.emit('playersOnline', onlinePlayers);
       //Emit to socket that connected AND broadcast to all sockets on connection
       //so all clients have accurate player count.
-      socket.username = "User"; //Default username
+      socket.username = 'User'; //Default username
 
-      socket.on('setUsername', function(username){
+      socket.on('setUsername', function(username) {
         socket.username = username;
       });
 
-      socket.on('newGuess', function(letter){
+      socket.on('newGuess', function(letter) {
         let guess = game.newGuess(letter.toLowerCase());
         socket.emit(guess, game.getState(socket.username));
         socket.broadcast.emit(guess, game.getState(socket.username));
         //On gameOver or Victory, a new game will be created after 5 seconds
-        if(guess === 'gameOver' || guess === 'victory'){
+        if (guess === 'gameOver' || guess === 'victory') {
           setTimeout(function() {
             game = new Game();
             socket.emit('newGame', game.getState());
-          socket.broadcast.emit('newGame', game.getState());
+            socket.broadcast.emit('newGame', game.getState());
           }, 5000);
         }
       });
 
-      socket.on('disconnect', function(){
+      socket.on('disconnect', function() {
         onlinePlayers--;
         socket.broadcast.emit('playersOnline', onlinePlayers);
       });

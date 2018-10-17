@@ -1,8 +1,13 @@
 export class Game {
   constructor() {
-    this.words = ["melon", "car", "airplane", "pig", "piano"];
-    this.word = this.words[Math.floor(Math.random() * this.words.length)].toLowerCase();
-    this.blankWord = this.word.replace(/\w/g, '_').split('').join(' ');
+    this.words = ['melon', 'car', 'airplane', 'pig', 'piano'];
+    this.word = this.words[
+      Math.floor(Math.random() * this.words.length)
+    ].toLowerCase();
+    this.blankWord = this.word
+      .replace(/\w/g, '_')
+      .split('')
+      .join(' ');
     this.guesses = [];
     this.correct = 0;
     this.incorrect = 0;
@@ -12,16 +17,15 @@ export class Game {
 
   newGuess(letter) {
     let prevBlank = this.blankWord;
-    let guessFound = this.guesses.find((guess) => {
+    let guessFound = this.guesses.find(guess => {
       return guess === letter;
     });
 
     if (guessFound === letter) {
       return 'repeatGuess';
     } else if (/[^\w\.\-]/.test(letter)) {
-      return 'invalidCharacter'
-    }
-    else if (guessFound === undefined) {
+      return 'invalidCharacter';
+    } else if (guessFound === undefined) {
       this.guesses.push(letter);
       let blankWordArray = this.blankWord.split(' ');
       //Updates mystery/blank word based on guesses
@@ -38,16 +42,13 @@ export class Game {
         // this.incorrect++;
         // console.log(this.blankWord);
         // return 'incorrectGuess';
-      }
-      else {
+      } else {
         return this.correctGuess();
         // this.correct++;
         // console.log(this.blankWord);
         // return 'correctGuess';
       }
-
     }
-
   }
 
   incorrectGuess() {
@@ -94,5 +95,4 @@ export class Game {
   announceGame() {
     console.log('New game started: ' + this.word + ' ' + this.blankWord);
   }
-
 }

@@ -1,87 +1,128 @@
 /* Base for hangman post */
 #planks-background {
-    position: fixed;
-    left:-10%;
-    right: -10%;
-    width: 120%;
-    z-index:-1;
-    bottom: 20%;
-  }
+  position: fixed;
+  left: -10%;
+  right: -10%;
+  width: 120%;
+  z-index: -1;
+  bottom: 20%;
+}
 
-  
 /* Clouds and sky */
 #clouds-background {
-    position: fixed;
-    z-index:-2;
-    top:0;
-    right:0;
-    left:0;
-    width: 100%;
-    bottom:0;
-    max-height: 200px;
-  }
-  
-$cloudTravelDistance: 50%; 
+  position: fixed;
+  z-index: -2;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  max-height: 200px;
+}
+
+$cloudTravelDistance: 50%;
 $cloudTravelTime: 90s;
 
-@-webkit-keyframes cloudFloat{
-    0%{-webkit-transform: translateX(1);}
-    50%{-webkit-transform: translateX($cloudTravelDistance);}
-    100%{-webkit-transform: translateX(1);}
-}
- 
-@keyframes cloudFloat{
-    0%{transform: translateX(0);}
-    50%{transform: translateX($cloudTravelDistance);}
-    100%{transform: translateX(0);}
-}
-
-@-webkit-keyframes cloudFloatOther{
-    0%{-webkit-transform: translateX(1);}
-    50%{-webkit-transform: translateX(-$cloudTravelDistance);}
-    100%{-webkit-transform: translateX(1);}
+@-webkit-keyframes cloudFloat {
+  0% {
+    -webkit-transform: translateX(1);
+  }
+  50% {
+    -webkit-transform: translateX($cloudTravelDistance);
+  }
+  100% {
+    -webkit-transform: translateX(1);
+  }
 }
 
-@keyframes cloudFloatOther{
-    0%{transform: translateX(0);}
-    50%{transform: translateX(-$cloudTravelDistance);}
-    100%{transform: translateX(0);}
+@keyframes cloudFloat {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX($cloudTravelDistance);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes cloudFloatOther {
+  0% {
+    -webkit-transform: translateX(1);
+  }
+  50% {
+    -webkit-transform: translateX(-$cloudTravelDistance);
+  }
+  100% {
+    -webkit-transform: translateX(1);
+  }
+}
+
+@keyframes cloudFloatOther {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-$cloudTravelDistance);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 // I'd add classes to these SVG items, but given they are prototypes it would have to be redone on edit.
 // in a more finished state we can change this to a single class
-#Cloud_1, #Cloud_2, #Cloud_3 {
-    transform: translateX(0%);
-    -webkit-animation: cloudFloatOther $cloudTravelTime ease-in-out forwards infinite;
-    animation: cloudFloatOther   $cloudTravelTime ease-in-out forwards infinite;
-
-} 
-#Cloud_4, #Cloud_5 {
-    transform: translateX(0%);
-    -webkit-animation: cloudFloat $cloudTravelTime ease-in-out forwards infinite;
-    animation: cloudFloat $cloudTravelTime ease-in-out forwards infinite;
+#Cloud_1,
+#Cloud_2,
+#Cloud_3 {
+  transform: translateX(0%);
+  -webkit-animation: cloudFloatOther $cloudTravelTime ease-in-out forwards
+    infinite;
+  animation: cloudFloatOther $cloudTravelTime ease-in-out forwards infinite;
+}
+#Cloud_4,
+#Cloud_5 {
+  transform: translateX(0%);
+  -webkit-animation: cloudFloat $cloudTravelTime ease-in-out forwards infinite;
+  animation: cloudFloat $cloudTravelTime ease-in-out forwards infinite;
 }
 
 /* Sun beams on Mr.Sun */
 
 $sunbeamsBounceTime: 3.5s;
-$sunbeamsBounceFactor: 0.96; // Remember to use a factor which is appropriate to your skin complexion 
-@-webkit-keyframes sunBeamBounce{
-    0%{-webkit-transform: scale(1);}
-    50%{-webkit-transform: scale($sunbeamsBounceFactor);}
-    100%{-webkit-transform: scale(1);}
-}
- 
-@keyframes sunBeamBounce{
-    0%{transform: scale(1);}
-    50%{transform: scale($sunbeamsBounceFactor);}
-    100%{transform: scale(1);}
+$sunbeamsBounceFactor: 0.96; // Remember to use a factor which is appropriate to your skin complexion
+@-webkit-keyframes sunBeamBounce {
+  0% {
+    -webkit-transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale($sunbeamsBounceFactor);
+  }
+  100% {
+    -webkit-transform: scale(1);
+  }
 }
 
-#Beams_1, #Beams_2, #Beams_3, #Beams_4 {
-    transition: all 1s ease;
+@keyframes sunBeamBounce {
+  0% {
     transform: scale(1);
-    -webkit-animation: sunBeamBounce $sunbeamsBounceTime ease-in-out forwards infinite;
-    animation: sunBeamBounce $sunbeamsBounceTime ease-in-out forwards infinite;
+  }
+  50% {
+    transform: scale($sunbeamsBounceFactor);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
+#Beams_1,
+#Beams_2,
+#Beams_3,
+#Beams_4 {
+  transition: all 1s ease;
+  transform: scale(1);
+  -webkit-animation: sunBeamBounce $sunbeamsBounceTime ease-in-out forwards
+    infinite;
+  animation: sunBeamBounce $sunbeamsBounceTime ease-in-out forwards infinite;
+}

@@ -3,9 +3,9 @@ var clientDisplay = require('./clientDisplay.js').clientDisplay;
 var display = null;
 
 export class clientGame {
-    // This code should take a data object from the socket
-    // run any logic the client needs, and bounce visual effects
-    // to clientDisplay. 
+  // This code should take a data object from the socket
+  // run any logic the client needs, and bounce visual effects
+  // to clientDisplay.
 
     constructor(gameInfo) {
         this.gameState = gameInfo;
@@ -35,24 +35,39 @@ export class clientGame {
         this.useDisplay('revealPart');
     }
 
-    correctGuess(data) {
-        this.gameState = data;
-        this.display.newGuess(data, 'correct');
-    }
+  reset() {
+    this.setDisplay('reset');
+  }
 
-    invalidGuess() {
-        this.display.newGuess(this.gameState, 'invalid');
-    }
+  incorrectGuess(data) {
+    this.gameState = data;
+    this.display.newGuess(data, 'incorrect');
+    this.setDisplay('revealPart');
+  }
 
-    gameOver(data) {
-        this.useDisplay('reset');
-        this.display.endGame(data, 'gameOver');
-    }
+  correctGuess(data) {
+    this.gameState = data;
+    this.display.newGuess(data, 'correct');
+  }
 
-    victory(data) {
-        this.display.endGame(data, 'victory');
-    }
+  invalidGuess() {
+    this.display.newGuess(this.gameState, 'invalid');
+  }
 
+  gameOver(data) {
+    this.setDisplay('reset');
+    this.display.endGame(data, 'gameOver');
+  }
+
+  victory(data) {
+    this.display.endGame(data, 'victory');
+  }
+
+  newGame(data) {
+    this.display.endGame(data, 'newGame');
+    this.reset();
+    this.gameState = data;
+  }
     newGame(data) {
         this.display.endGame(data, 'newGame');
         this.reset();
