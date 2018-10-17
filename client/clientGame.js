@@ -35,16 +35,6 @@ export class clientGame {
     this.useDisplay('revealPart');
   }
 
-  reset() {
-    this.useDisplay('reset');
-  }
-
-  incorrectGuess(data) {
-    this.gameState = data;
-    this.display.newGuess(data, 'incorrect');
-    this.useDisplay('revealPart');
-  }
-
   correctGuess(data) {
     this.gameState = data;
     this.display.newGuess(data, 'correct');
@@ -68,11 +58,6 @@ export class clientGame {
     this.reset();
     this.gameState = data;
   }
-  newGame(data) {
-    this.display.endGame(data, 'newGame');
-    this.reset();
-    this.gameState = data;
-  }
 
   submitGuess() {
     // This has just been copy pasted over from clientSocket, and could do with a refactor
@@ -81,8 +66,7 @@ export class clientGame {
     var guessInput = document.querySelectorAll('[data-guess-input]')[0];
     var letter = guessInput.value;
     var isAValidCharacter = /^[a-zA-Z]*$/.test(letter) === true && letter != '';
-    var isAnInvalidCharacter =
-      /^[a-zA-Z]*$/.test(letter) === false || letter == '';
+    var isAnInvalidCharacter = /^[a-zA-Z]*$/.test(letter) === false || letter == '';
     if (isAValidCharacter) {
       let guessFound = this.gameState.guesses.find(guess => {
         return guess === letter;
@@ -102,9 +86,6 @@ export class clientGame {
     // Initialize any special keypresses
     var self = this;
     document.onkeydown = function(e) {
-      // This isn't the right place for this, but since the guess submit events are hooked in here, and
-      // the data isn't available elsewhere, it is temporarily here.
-      // May require a bit of extra handling to avoid double fires/unwanted behaviour
       if (e.keyCode == 13) {
         socket.sendToServer('submitGuess');
         self.submitGuess();
