@@ -66,7 +66,8 @@ export class clientGame {
     var guessInput = document.querySelectorAll('[data-guess-input]')[0];
     var letter = guessInput.value;
     var isAValidCharacter = /^[a-zA-Z]*$/.test(letter) === true && letter != '';
-    var isAnInvalidCharacter = /^[a-zA-Z]*$/.test(letter) === false || letter == '';
+    var isAnInvalidCharacter =
+      /^[a-zA-Z]*$/.test(letter) === false || letter == '';
     if (isAValidCharacter) {
       let guessFound = this.gameState.guesses.find(guess => {
         return guess === letter;
