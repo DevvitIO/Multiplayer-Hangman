@@ -1,27 +1,30 @@
 # Project Structure
+
 To make future development and separation tasks a little bit easier the server and client code is separated into different directories
 
 # Build Process
 
 ## [Babel](https://babeljs.io/)
+
 The build process runs the entire JS code through Babel which allows the developer to use new Javascript features (ES6+). If some features are not supported, there may just be a Babel plugin missing.
 
 ## [Webpack](https://webpack.js.org/)
+
 To bundle the Client side code into a single file webpack concatenates all JS code in the `client` directory and creates a `bundle.js` file which is stored in the `client/dist` directory and served by the `server` to the users.
 
 Futhermore webpack copies all `assets` and the `index.html` file into the dist directory. When the dev environment is executed Webpack watches for file changes in the `client` directory and reloads the page.
 
 ## [Nodemon](https://nodemon.io/)
+
 During development Nodemon starts the `server` and watches for file changes. The server restarts if one of its files gets updated and triggers a browser reload.
 
 # Getting started
+
 - `git clone https://github.com/DevvitIO/Multiplayer-Hangman.git` (clone the project to your local machine)
 - `npm install` (navigate into the project's root directory)
 - `npm start`
 
-
-
-# Site Javascript Layout: 
+# Site Javascript Layout:
 
 ## Client side code
 
@@ -31,7 +34,7 @@ It's an aim to make sure there is as little crossover between these three as pos
 
 #### clientGame.js
 
-- Contains client side game logic 
+- Contains client side game logic
 - Talks with clientSocket.js to receive and send events to the server
 - Initiates any display related functionality by sending it to clientDisplay.js
 
@@ -43,7 +46,6 @@ It's an aim to make sure there is as little crossover between these three as pos
 
 - Talks with the server to keep games updated
 - Handles multiple games, rooms, and other meta-game information
-
 
 ## Server side code
 
@@ -57,11 +59,10 @@ It's an aim to make sure there is as little crossover between these three as pos
 
 #### Game.js
 
-- Controls server side game logic 
+- Controls server side game logic
 - Double checks that rules from clientGame.js are being held
 - Emits socket events
 
-
---------------------
+---
 
 I have a sneaking suspicion we could create a script that is shared between game.js and clientGame.js which can be written/amended once and runs the logic in both places, minimizing the need for updating two bits of code simultaneously when it comes to game rules.

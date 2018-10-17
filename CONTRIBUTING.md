@@ -8,9 +8,9 @@ https://orgmanager.miguelpiedrafita.com/join/32555830
 Come hang out with us at our Discord channel here:
 https://discordapp.com/invite/erPjG7C
 
-1. Clone the repository, and go fork yourself.
-2. Pick an issue from the list OR come and ask one of us what you can help with.
-3. Use your awesome coding skills to add features or fix bugs!
+1.  Clone the repository, and go fork yourself.
+2.  Pick an issue from the list OR come and ask one of us what you can help with.
+3.  Use your awesome coding skills to add features or fix bugs!
 
 ## Contributing Requirements
 

@@ -1,16 +1,16 @@
-const path = require("path");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
-const outputDirectory = "dist";
+const outputDirectory = 'dist';
 
 module.exports = {
-  mode: "development",
-  entry: "./client/client.js",
+  mode: 'development',
+  entry: './client/client.js',
   watch: true,
   output: {
-    path: path.join(__dirname, "client", outputDirectory),
-    filename: "bundle.js"
+    path: path.join(__dirname, 'client', outputDirectory),
+    filename: 'bundle.js'
   },
   watchOptions: {
     ignored: ['server/**/*.js', 'node_modules']
@@ -21,18 +21,18 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
+          loader: 'babel-loader'
         }
       },
       {
         test: /\.scss$/,
-        use: ["style-loader", "css-loader", "sass-loader"]
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
         use: [
           {
-            loader: "file-loader",
+            loader: 'file-loader',
             options: {}
           }
         ]
@@ -41,8 +41,8 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-      { from: "assets/**/*", context: "client" },
-      { from: "index.html", context: "client" }
+      { from: 'assets/**/*', context: 'client' },
+      { from: 'index.html', context: 'client' }
     ]),
     new BrowserSyncPlugin({
       server: { baseDir: ['client/dist', 'server'] },
