@@ -24,16 +24,15 @@ export class Server {
     var game = new Game();
     var onlinePlayers = 0;
     this.io.on('connection', function(socket) {
-      socket.on('testres', function() {
-        console.log('testestestes');
-      });
       onlinePlayers++;
+      socket.username = 'User'; //Default username
       socket.emit('gameInformation', game.getState());
-      socket.emit('playersOnline', onlinePlayers);
-      socket.broadcast.emit('playersOnline', onlinePlayers);
+
+      var playerInfo = { count: onlinePlayers, players : ['bob','jim'] };
+      socket.emit('playersOnline', playerInfo);
+      socket.broadcast.emit('playersOnline', playerInfo);
       //Emit to socket that connected AND broadcast to all sockets on connection
       //so all clients have accurate player count.
-      socket.username = 'User'; //Default username
 
       socket.on('setUsername', function(username) {
         socket.username = username;

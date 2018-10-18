@@ -44,24 +44,35 @@ export class clientGame {
     this.display.newGuess(this.gameState, 'invalid');
   }
 
-  gameOver(data) {
-    this.useDisplay('reset');
-    this.display.endGame(data, 'gameOver');
+  endGame(data, status) {
+    this.secretWord.innerHTML = data.blankword;
+    this.userGuesses.innerHTML = 'Guesses: ' + data.guesses;
+    if (status === 'victory') {
+      this.display.endGame(data, 'victory');
+      this.reset();
+    } else if (status === 'gameOver') {
+      this.display.endGame(data, 'gameOver');
+      this.reset();
+    } else if (status === 'newGame') {
+      this.display.endGame(data, 'newGame');
+      this.reset();
+      this.gameState = data;
+    }
+    var secretWordContainer = this.testt;
+    this.testt.innerHTML = '';
+    data.blankword.split(' ').forEach(function(l) {
+      secretWordContainer.innerHTML +=
+        '<span class="guess-letter">' + l.toUpperCase() + '</span>';
+    });
   }
 
-  victory(data) {
-    this.display.endGame(data, 'victory');
-  }
 
-  newGame(data) {
-    this.display.endGame(data, 'newGame');
-    this.reset();
-    this.gameState = data;
+  updatePlayers(data) {
+    this.display.populatePlayers(data);
   }
 
   submitGuess() {
     // This has just been copy pasted over from clientSocket, and could do with a refactor
-    var onlinePlayers = document.querySelectorAll('*[data-online-players]')[0];
     var guessSubmit = document.querySelectorAll('*[data-guess-submit]')[0];
     var guessInput = document.querySelectorAll('[data-guess-input]')[0];
     var letter = guessInput.value;
@@ -86,6 +97,7 @@ export class clientGame {
   initKeyboard() {
     // Initialize any special keypresses
     var self = this;
+    var display = this.display;
     document.onkeydown = function(e) {
       if (e.keyCode == 13) {
         socket.sendToServer('submitGuess');
@@ -94,6 +106,7 @@ export class clientGame {
       var isLowercaseLetter = 65 <= e.keyCode && e.keyCode <= 90; // Only lowercase seems to be necessary due to onkeydown
       if (isLowercaseLetter) {
         guessInput.value = e.key;
+        display.showGuess(e.key);
       }
     };
   }

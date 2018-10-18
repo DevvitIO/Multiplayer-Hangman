@@ -12,8 +12,8 @@ export function sendToServer(eventName, data = null) {
   socket.emit(eventName, data);
 }
 
-socket.on('playersOnline', function(count) {
-  onlinePlayers.innerHTML = count;
+socket.on('playersOnline', data => {
+  game.updatePlayers(data);
 });
 
 socket.on('gameInformation', data => {
@@ -38,13 +38,13 @@ socket.on('correctGuess', data => {
 });
 
 socket.on('victory', data => {
-  game.victory(data);
+  game.endGame(data, 'Victory');
 });
 
 socket.on('gameOver', data => {
-  game.gameOver(data);
+  game.endGame(data, 'gameOver');
 });
 
 socket.on('newGame', data => {
-  game.newGame(data);
+  game.endGame(data, 'newGame');
 });
