@@ -10,6 +10,7 @@ export class clientGame {
   constructor(gameInfo) {
     this.gameState = gameInfo;
     this.display = new clientDisplay(this.gameState);
+    this.guessInput = document.querySelectorAll('*[data-guess-input]')[0];
     this.loadGame();
     this.initKeyboard();
   }
@@ -22,63 +23,65 @@ export class clientGame {
 
   loadGame() {
     //Initializes clientDisplay
-    this.useDisplay('loadGame');
+    this.useDisplay('loadGame', this.gameState.incorrect );
   }
 
-  reset() {
-    this.useDisplay('reset');
-  }
-
-  incorrectGuess(data) {
-    this.gameState = data;
-    this.display.newGuess(data, 'incorrect');
+  incorrectGuess(data, status) {
+    // In response to the server sending an incorrect guess event
+    if (status === 'invalidGuess'){
+      this.useDisplay('invalidGuess');
+    } else if (status === 'incorrectGuess') {
+      this.useDisplay('incorrectGuess');
+    } else if (status === 'repeatGuess') {
+      this.useDisplay('invalidGuess');
+    }
+    this.useDisplay('updatePastGuesses');
     this.useDisplay('revealPart');
   }
 
   correctGuess(data) {
+    // In response to the server sending a correct guess event
     this.gameState = data;
-    this.display.newGuess(data, 'correct');
+    this.useDisplay('correctGuess');
   }
 
-  invalidGuess() {
-    this.display.newGuess(this.gameState, 'invalid');
+  endGame(data, status) {
+    // In response to the server sending a finished game event
+    this.useDisplay('updateSecretWord');
+    this.useDisplay('updatePastGuesses');
+    if (status === 'victory') {
+      this.useDisplay('victory');
+      this.useDisplay('reset');
+    } else if (status === 'gameOver') {
+      this.useDisplay('defeat');
+      this.useDisplay('reset');
+    } else if (status === 'newGame') {
+      this.useDisplay('newGame');
+      this.useDisplay('reset');
+      this.gameState = data;
+    }
   }
 
-  gameOver(data) {
-    this.useDisplay('reset');
-    this.display.endGame(data, 'gameOver');
+  updatePlayers(data) {
+    // Update the player list
+    this.display.updatePlayers(data);
   }
 
-  victory(data) {
-    this.display.endGame(data, 'victory');
-  }
-
-  newGame(data) {
-    this.display.endGame(data, 'newGame');
-    this.reset();
-    this.gameState = data;
-  }
-
-  submitGuess() {
-    // This has just been copy pasted over from clientSocket, and could do with a refactor
-    var onlinePlayers = document.querySelectorAll('*[data-online-players]')[0];
-    var guessSubmit = document.querySelectorAll('*[data-guess-submit]')[0];
-    var guessInput = document.querySelectorAll('[data-guess-input]')[0];
-    var letter = guessInput.value;
+  submitGuess(letter, gameState=null) {
+    // Submit a guess to the server ( if it passes client side validation )
     var isAValidCharacter = /^[a-zA-Z]*$/.test(letter) === true && letter != '';
-    var isAnInvalidCharacter =
-      /^[a-zA-Z]*$/.test(letter) === false || letter == '';
+    var isAnInvalidCharacter = /^[a-zA-Z]*$/.test(letter) === false || letter == '';
     if (isAValidCharacter) {
       let guessFound = this.gameState.guesses.find(guess => {
         return guess === letter;
       });
       if (guessFound === letter) {
-        this.invalidGuess();
+        this.useDisplay('updateSecretWord');
         return;
       }
       socket.sendToServer('newGuess', letter);
     } else if (isAnInvalidCharacter) {
-      this.invalidGuess();
+        this.display.newGuess(this.gameState, 'invalid');
       return;
     }
   }
@@ -86,14 +89,17 @@ export class clientGame {
   initKeyboard() {
     // Initialize any special keypresses
     var self = this;
+    var display = this.display;
+    var gameState = this.gameState;
+    var guessInput = this.guessInput;
     document.onkeydown = function(e) {
-      if (e.keyCode == 13) {
-        socket.sendToServer('submitGuess');
-        self.submitGuess();
+      if (e.keyCode == 13) { // Enter
+        self.submitGuess(guessInput.value); // Refers to a hidden input element
       }
       var isLowercaseLetter = 65 <= e.keyCode && e.keyCode <= 90; // Only lowercase seems to be necessary due to onkeydown
       if (isLowercaseLetter) {
         guessInput.value = e.key;
+        display.showGuess(e.key);
       }
     };
   }

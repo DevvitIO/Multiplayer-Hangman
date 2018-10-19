@@ -17,6 +17,9 @@ body {
   text-align: center;
   background-color: $backgroundColour;
   color: $generalFontColour;
+  font-family: 'Kanit', sans-serif;
+  letter-spacing:3px;
+  font-size: 1.5rem;
 }
 
 #game-view-container {
@@ -33,23 +36,28 @@ body {
 
 #sidebar-container {
   float: right;
-  width: 50%;
+  width: 40%;
   text-align: right;
   margin-right: 25px;
 
-  #profile-pig-icon {
-    width: 24px;
-    height: 24px;
-  }
   #player-profile-dropdown {
     display: none;
   }
+
 }
+
+#guess-display{
+  font-size: 10rem;
+}
+
+#guessInput {
+  display: none;
+}
+
 h1 {
   margin: auto;
   line-height: 4.5rem;
   vertical-align: middle;
-  font-family: 'Anton', sans-serif;
   font-size: 3rem;
 }
 
@@ -63,4 +71,29 @@ h1 {
 
 .correct {
   color: #10a800;
+}
+
+.char1 {
+  color:red;
+}
+
+.char2{
+  color:blue;
+}
+
+.char3{
+  color:green;
+}
+
+.char4 {
+  color: beige;
+}
+.char5{
+  color:brown;
+}
+.char6{
+  color:olive;
+}
+.char7{
+  color:black;
 }

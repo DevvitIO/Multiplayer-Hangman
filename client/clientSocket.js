@@ -12,8 +12,8 @@ export function sendToServer(eventName, data = null) {
   socket.emit(eventName, data);
 }
 
-socket.on('playersOnline', function(count) {
-  onlinePlayers.innerHTML = count;
+socket.on('playersOnline', data => {
+  game.updatePlayers(data);
 });
 
 socket.on('gameInformation', data => {
@@ -22,29 +22,36 @@ socket.on('gameInformation', data => {
 
 // I take it the events below are going to be migrated into the event above ^ and passed to game to handle it's own events
 socket.on('repeatGuess', data => {
-  game.invalidGuess();
+  game.gameState = data;
+  game.incorrectGuess(data, 'invalidGuess');
 });
 
 socket.on('invalidCharacter', data => {
-  game.invalidGuess();
+  game.gameState = data;
+  game.incorrectGuess(data, 'invalidGuess');
 });
 
 socket.on('incorrectGuess', data => {
-  game.incorrectGuess(data);
+  game.gameState = data;
+  game.incorrectGuess(data, 'incorrectGuess');
 });
 
 socket.on('correctGuess', data => {
+  game.gameState = data;
   game.correctGuess(data);
 });
 
 socket.on('victory', data => {
-  game.victory(data);
+  game.gameState = data;
+  game.endGame(data, 'Victory');
 });
 
 socket.on('gameOver', data => {
-  game.gameOver(data);
+  game.gameState = data;
+  game.endGame(data, 'gameOver');
 });
 
 socket.on('newGame', data => {
-  game.newGame(data);
+  game.gameState = data;
+  game.endGame(data, 'newGame');
 });

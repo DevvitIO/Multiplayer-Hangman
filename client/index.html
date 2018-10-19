@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<!-- <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet"> -->
+	<link href="https://fonts.googleapis.com/css?family=Kanit:800" rel="stylesheet"> 
 	<title>Multiplayer - Hangman</title>
 </head>
 
@@ -48,21 +48,13 @@
 				<input id="guessInput" data-guess-input type="text"  maxlength="1">
 				<div id="game-message" data-game-message class="space"></div>
 				<div id="user-guesses" data-user-guesses class="space"></div>
+
+				<div id="guess-display" data-guess-display></div>
 			</div>
 		</div>
 	</div>
 	<div id="bottom-panel">
-		<div id="secret-word-container" data-secret-word-container></div><br>
-		<div id="secret-word-container-style" data-secret-word-display>
-			<span class="guess-letter-1">A</span>
-			<span class="guess-letter-2">R</span>
-			<span class="guess-letter-3">B</span>
-			<span class="guess-letter-4">_</span>
-			<span class="guess-letter-5">R</span>
-			<span class="guess-letter-5">_</span>
-			<span class="guess-letter-6">_</span>
-		</div>
-		
+		<div id="secret-word-container-style" data-secret-word-display></div>
 	</div>
 	<script src="bundle.js"></script>
 </body>
