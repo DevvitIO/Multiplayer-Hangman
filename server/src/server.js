@@ -28,7 +28,7 @@ export class Server {
       socket.username = 'User'; //Default username
       socket.emit('gameInformation', game.getState());
 
-      var playerInfo = { count: onlinePlayers, players : ['bob','jim'] };
+      var playerInfo = { count: onlinePlayers, players: ['bob', 'jim'] };
       socket.emit('playersOnline', playerInfo);
       socket.broadcast.emit('playersOnline', playerInfo);
       //Emit to socket that connected AND broadcast to all sockets on connection
@@ -43,9 +43,9 @@ export class Server {
         socket.emit(guess, game.getState(socket.username));
         socket.broadcast.emit(guess, game.getState(socket.username));
         if (guess === 'gameOver' || guess === 'victory') {
-            game = new Game();
-            socket.emit('newGame', game.getState());
-            socket.broadcast.emit('newGame', game.getState());
+          game = new Game();
+          socket.emit('newGame', game.getState());
+          socket.broadcast.emit('newGame', game.getState());
         }
       });
 

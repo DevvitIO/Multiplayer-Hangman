@@ -77,8 +77,7 @@ $cloudTravelTime: 90s;
 #Cloud_2,
 #Cloud_3 {
   transform: translateX(0%);
-  -webkit-animation: cloudFloatOther $cloudTravelTime ease-in-out forwards
-    infinite;
+  -webkit-animation: cloudFloatOther $cloudTravelTime ease-in-out forwards infinite;
   animation: cloudFloatOther $cloudTravelTime ease-in-out forwards infinite;
 }
 #Cloud_4,
@@ -122,7 +121,6 @@ $sunbeamsBounceFactor: 0.96; // Remember to use a factor which is appropriate to
 #Beams_4 {
   transition: all 1s ease;
   transform: scale(1);
-  -webkit-animation: sunBeamBounce $sunbeamsBounceTime ease-in-out forwards
-    infinite;
+  -webkit-animation: sunBeamBounce $sunbeamsBounceTime ease-in-out forwards infinite;
   animation: sunBeamBounce $sunbeamsBounceTime ease-in-out forwards infinite;
 }

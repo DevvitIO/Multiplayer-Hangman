@@ -40,10 +40,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new CopyWebpackPlugin([
-      { from: 'assets/**/*', context: 'client' },
-      { from: 'index.html', context: 'client' }
-    ]),
+    new CopyWebpackPlugin([{ from: 'assets/**/*', context: 'client' }, { from: 'index.html', context: 'client' }]),
     new BrowserSyncPlugin({
       server: { baseDir: ['client/dist', 'server'] },
       watch: true

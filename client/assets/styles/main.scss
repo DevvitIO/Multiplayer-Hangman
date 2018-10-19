@@ -18,7 +18,7 @@ body {
   background-color: $backgroundColour;
   color: $generalFontColour;
   font-family: 'Kanit', sans-serif;
-  letter-spacing:3px;
+  letter-spacing: 3px;
   font-size: 1.5rem;
 }
 
@@ -43,10 +43,9 @@ body {
   #player-profile-dropdown {
     display: none;
   }
-
 }
 
-#guess-display{
+#guess-display {
   font-size: 10rem;
 }
 
@@ -74,26 +73,26 @@ h1 {
 }
 
 .char1 {
-  color:red;
+  color: red;
 }
 
-.char2{
-  color:blue;
+.char2 {
+  color: blue;
 }
 
-.char3{
-  color:green;
+.char3 {
+  color: green;
 }
 
 .char4 {
   color: beige;
 }
-.char5{
-  color:brown;
+.char5 {
+  color: brown;
 }
-.char6{
-  color:olive;
+.char6 {
+  color: olive;
 }
-.char7{
-  color:black;
+.char7 {
+  color: black;
 }

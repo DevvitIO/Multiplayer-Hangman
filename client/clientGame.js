@@ -23,12 +23,12 @@ export class clientGame {
 
   loadGame() {
     //Initializes clientDisplay
-    this.useDisplay('loadGame', this.gameState.incorrect );
+    this.useDisplay('loadGame', this.gameState.incorrect);
   }
 
   incorrectGuess(data, status) {
     // In response to the server sending an incorrect guess event
-    if (status === 'invalidGuess'){
+    if (status === 'invalidGuess') {
       this.useDisplay('invalidGuess');
     } else if (status === 'incorrectGuess') {
       this.useDisplay('incorrectGuess');
@@ -67,7 +67,7 @@ export class clientGame {
     this.display.updatePlayers(data);
   }
 
-  submitGuess(letter, gameState=null) {
+  submitGuess(letter, gameState = null) {
     // Submit a guess to the server ( if it passes client side validation )
     var isAValidCharacter = /^[a-zA-Z]*$/.test(letter) === true && letter != '';
     var isAnInvalidCharacter = /^[a-zA-Z]*$/.test(letter) === false || letter == '';
@@ -81,7 +81,7 @@ export class clientGame {
       }
       socket.sendToServer('newGuess', letter);
     } else if (isAnInvalidCharacter) {
-        this.display.newGuess(this.gameState, 'invalid');
+      this.display.newGuess(this.gameState, 'invalid');
       return;
     }
   }
@@ -93,7 +93,8 @@ export class clientGame {
     var gameState = this.gameState;
     var guessInput = this.guessInput;
     document.onkeydown = function(e) {
-      if (e.keyCode == 13) { // Enter
+      if (e.keyCode == 13) {
+        // Enter
         self.submitGuess(guessInput.value); // Refers to a hidden input element
       }
       var isLowercaseLetter = 65 <= e.keyCode && e.keyCode <= 90; // Only lowercase seems to be necessary due to onkeydown

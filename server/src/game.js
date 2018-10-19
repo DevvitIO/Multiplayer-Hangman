@@ -1,9 +1,7 @@
 export class Game {
   constructor() {
     this.words = ['melon', 'car', 'airplane', 'pig', 'piano'];
-    this.word = this.words[
-      Math.floor(Math.random() * this.words.length)
-    ].toLowerCase();
+    this.word = this.words[Math.floor(Math.random() * this.words.length)].toLowerCase();
     this.blankWord = this.word
       .replace(/\w/g, '_')
       .split('')

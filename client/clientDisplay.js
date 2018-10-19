@@ -15,58 +15,43 @@ export class clientDisplay {
     this.usernameSubmit = document.querySelectorAll('*[data-username-submit]')[0];
     this.playerList = document.querySelectorAll('*[data-player-list]')[0];
     var onlinePlayers = document.querySelectorAll('*[data-online-players]')[0];
-    this.bodyParts = [
-      'Head',
-      'Torso',
-      'Right_Arm',
-      'Left_Arm',
-      'Right_leg',
-      'Left_Leg'
-    ]; // Bodypart ID's, in order of reveal
+    this.bodyParts = ['Head', 'Torso', 'Right_Arm', 'Left_Arm', 'Right_leg', 'Left_Leg']; // Bodypart ID's, in order of reveal
     this.gameState = gameState;
     this.reset();
     this.loadGame();
-
   }
 
-  incorrectGuess(){
+  incorrectGuess() {
     // display actions for an incorrect guess
-      this.gameMessage.innerHTML = this.gameState.guesser + ' guessed incorrectly. There are ' + (6 - this.gameState.incorrect) + ' guesses left.';
-      this.revealPart();
+    this.gameMessage.innerHTML = this.gameState.guesser + ' guessed incorrectly. There are ' + (6 - this.gameState.incorrect) + ' guesses left.';
+    this.revealPart();
   }
 
-  invalidGuess(){
+  invalidGuess() {
     // display actions for an invalid guess
-      this.gameMessage.innerHTML =
-        'That is not a valid character to guess, or has already been guessed!';
-        this.revealPart();
+    this.gameMessage.innerHTML = 'That is not a valid character to guess, or has already been guessed!';
+    this.revealPart();
   }
 
-  correctGuess(){
+  correctGuess() {
     // display actions for a correct guess
-      this.gameMessage.innerHTML = this.gameState.guesser + ' guessed correctly!';
+    this.gameMessage.innerHTML = this.gameState.guesser + ' guessed correctly!';
     this.updateSecretWord();
   }
 
-  victory(){
+  victory() {
     // display actions for a victory game case
-      this.gameMessage.innerHTML =
-        '<span style="color: green">' +
-        data.guesser +
-        ' guessed correctly to win the game! Victory!</span>';
+    this.gameMessage.innerHTML = '<span style="color: green">' + data.guesser + ' guessed correctly to win the game! Victory!</span>';
   }
 
-  newGame(){
+  newGame() {
     // display actions for a new game case
-      this.gameMessage.innerHTML = 'New game has started!';
+    this.gameMessage.innerHTML = 'New game has started!';
   }
 
-  defeat(){ 
+  defeat() {
     // Display actions for a defeat case
-      this.gameMessage.innerHTML =
-        '<span style="color: red">' +
-        this.gameState.guesser +
-        ' guessed wrong. Game Over!</span>';
+    this.gameMessage.innerHTML = '<span style="color: red">' + this.gameState.guesser + ' guessed wrong. Game Over!</span>';
   }
 
   revealPart() {
@@ -76,9 +61,9 @@ export class clientDisplay {
     currentPartElem.style.opacity = '1'; // This function should live in clientDisplay
   }
 
-  hidePart(partElement){
+  hidePart(partElement) {
     // Hide a bodypart
-    partElement.style.opacity = '0'; 
+    partElement.style.opacity = '0';
   }
 
   loadGame(guessStage) {
@@ -98,11 +83,11 @@ export class clientDisplay {
       let partElement = document.getElementById(part);
       this.hidePart(partElement);
     }
-    this.userGuesses.innerHTML = "";
-    this.updateSecretWord(); 
+    this.userGuesses.innerHTML = '';
+    this.updateSecretWord();
   }
 
-  updatePastGuesses(){
+  updatePastGuesses() {
     // Display previously guessed letters
     this.userGuesses.innerHTML = 'Guesses: ' + this.gameState.guesses;
   }
@@ -113,19 +98,17 @@ export class clientDisplay {
     this.playerList.innerHTML = playerNames.players;
   }
 
-  updateSecretWord(){
+  updateSecretWord() {
     //
     var secretWordContainer = this.secretWord;
     this.secretWord.innerHTML = '';
     this.gameState.blankword.split(' ').forEach(function(l) {
-      secretWordContainer.innerHTML +=
-        '<span class="guess-letter">' + l.toUpperCase() + '</span>';
+      secretWordContainer.innerHTML += '<span class="guess-letter">' + l.toUpperCase() + '</span>';
     });
   }
 
-  showGuess(letter){
+  showGuess(letter) {
     // Shows the current letter a user has selected
     this.guessDisplay.innerHTML = letter;
   }
-
 }
