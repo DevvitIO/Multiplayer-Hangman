@@ -22,29 +22,40 @@ socket.on('gameInformation', data => {
 
 // I take it the events below are going to be migrated into the event above ^ and passed to game to handle it's own events
 socket.on('repeatGuess', data => {
-  game.invalidGuess();
+  game.gameState = data;
+  game.incorrectGuess(data, 'invalidGuess');
 });
 
 socket.on('invalidCharacter', data => {
-  game.invalidGuess();
+  console.log("Invalid char: ", data);
+  game.gameState = data;
+  game.incorrectGuess(data, 'invalidGuess');
 });
 
 socket.on('incorrectGuess', data => {
-  game.incorrectGuess(data);
+  
+  console.log("Incorrect guess sock: ", data);
+  game.gameState = data;
+  game.incorrectGuess(data, 'incorrectGuess');
 });
 
 socket.on('correctGuess', data => {
+  game.gameState = data;
+  console.log("Correct guess data: ", data);
   game.correctGuess(data);
 });
 
 socket.on('victory', data => {
+  game.gameState = data;
   game.endGame(data, 'Victory');
 });
 
 socket.on('gameOver', data => {
+  game.gameState = data;
   game.endGame(data, 'gameOver');
 });
 
 socket.on('newGame', data => {
+  game.gameState = data;
   game.endGame(data, 'newGame');
 });

@@ -10,6 +10,7 @@ export class clientGame {
   constructor(gameInfo) {
     this.gameState = gameInfo;
     this.display = new clientDisplay(this.gameState);
+    this.guessInput = document.querySelectorAll('*[data-guess-input]')[0];
     this.loadGame();
     this.initKeyboard();
   }
@@ -22,86 +23,83 @@ export class clientGame {
 
   loadGame() {
     //Initializes clientDisplay
-    this.useDisplay('loadGame');
+    console.log(this.gameState.incorrect);
+    this.useDisplay('loadGame', this.gameState.incorrect );
   }
 
-  reset() {
-    this.useDisplay('reset');
-  }
-
-  incorrectGuess(data) {
-    this.gameState = data;
-    this.display.newGuess(data, 'incorrect');
+  incorrectGuess(data, status) {
+    if (status === 'invalidGuess'){
+      this.useDisplay('invalidGuess');
+    } else if (status === 'incorrectGuess') {
+      this.useDisplay('incorrectGuess');
+    } else if (status === 'repeatGuess') {
+      this.useDisplay('invalidGuess');
+    }
+    this.useDisplay('updatePastGuesses');
     this.useDisplay('revealPart');
   }
 
   correctGuess(data) {
+    console.log("Correct guess, game: ");
     this.gameState = data;
-    this.display.newGuess(data, 'correct');
-  }
-
-  invalidGuess() {
-    this.display.newGuess(this.gameState, 'invalid');
+    this.useDisplay('newGuess', 'correctGuess');
   }
 
   endGame(data, status) {
-    this.secretWord.innerHTML = data.blankword;
-    this.userGuesses.innerHTML = 'Guesses: ' + data.guesses;
+    this.useDisplay('showSecretWord');
+    this.useDisplay('updatePastGuesses');
     if (status === 'victory') {
-      this.display.endGame(data, 'victory');
-      this.reset();
+      this.useDisplay('victory');
+      this.useDisplay('reset');
     } else if (status === 'gameOver') {
-      this.display.endGame(data, 'gameOver');
-      this.reset();
+      this.useDisplay('defeat');
+      this.useDisplay('reset');
     } else if (status === 'newGame') {
-      this.display.endGame(data, 'newGame');
-      this.reset();
+      this.useDisplay('newGame');
+      this.useDisplay('reset');
       this.gameState = data;
     }
-    var secretWordContainer = this.testt;
-    this.testt.innerHTML = '';
-    data.blankword.split(' ').forEach(function(l) {
-      secretWordContainer.innerHTML +=
-        '<span class="guess-letter">' + l.toUpperCase() + '</span>';
-    });
   }
 
 
   updatePlayers(data) {
-    this.display.populatePlayers(data);
+    this.display.updatePlayers(data);
   }
 
-  submitGuess() {
+  submitGuess(letter, gameState=null) {
+    console.log("Letter: " , letter);
+    if (gameState !== null) { console.log("Check"); this.gameState = gameState; } // Hacky work around for losing the gameState reference in a keydown event.
     // This has just been copy pasted over from clientSocket, and could do with a refactor
-    var guessSubmit = document.querySelectorAll('*[data-guess-submit]')[0];
-    var guessInput = document.querySelectorAll('[data-guess-input]')[0];
-    var letter = guessInput.value;
     var isAValidCharacter = /^[a-zA-Z]*$/.test(letter) === true && letter != '';
-    var isAnInvalidCharacter =
-      /^[a-zA-Z]*$/.test(letter) === false || letter == '';
+    var isAnInvalidCharacter = /^[a-zA-Z]*$/.test(letter) === false || letter == '';
     if (isAValidCharacter) {
+      
+    console.log("Submit guess gamestate: " , typeof(this.gameState.guesses), this.gameState.guesses);
       let guessFound = this.gameState.guesses.find(guess => {
         return guess === letter;
       });
       if (guessFound === letter) {
-        this.invalidGuess();
+        this.useDisplay('newGuess', 'correctGuess');
         return;
       }
       socket.sendToServer('newGuess', letter);
     } else if (isAnInvalidCharacter) {
-      this.invalidGuess();
+        this.display.newGuess(this.gameState, 'invalid');
       return;
     }
+    
+    console.log("Submit guess gamestate: " , this.gameState);
   }
 
   initKeyboard() {
     // Initialize any special keypresses
     var self = this;
     var display = this.display;
+    var gameState = this.gameState;
+    var guessInput = this.guessInput;
     document.onkeydown = function(e) {
-      if (e.keyCode == 13) {
-        socket.sendToServer('submitGuess');
-        self.submitGuess();
+      if (e.keyCode == 13) { // Enter
+        self.submitGuess(guessInput.value); // Refers to a hidden input element
       }
       var isLowercaseLetter = 65 <= e.keyCode && e.keyCode <= 90; // Only lowercase seems to be necessary due to onkeydown
       if (isLowercaseLetter) {
