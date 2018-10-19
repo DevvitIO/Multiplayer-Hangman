@@ -27,21 +27,17 @@ socket.on('repeatGuess', data => {
 });
 
 socket.on('invalidCharacter', data => {
-  console.log("Invalid char: ", data);
   game.gameState = data;
   game.incorrectGuess(data, 'invalidGuess');
 });
 
 socket.on('incorrectGuess', data => {
-  
-  console.log("Incorrect guess sock: ", data);
   game.gameState = data;
   game.incorrectGuess(data, 'incorrectGuess');
 });
 
 socket.on('correctGuess', data => {
   game.gameState = data;
-  console.log("Correct guess data: ", data);
   game.correctGuess(data);
 });
 

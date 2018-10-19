@@ -1,10 +1,11 @@
 import * as socket from './clientSocket.js'; //submitGuess(letter); and setUsername(username);
 
 export class clientDisplay {
-  //This code alters the visuals/ui of the game.
-  //Methods from this class are called from clientGame.js upon game-state changes.
+  // This code alters the visuals/ui of the game.
+  // Methods from this class are called from clientGame.js upon game-state changes.
+  // The display does have access to the gameState data directly
+
   constructor(gameState) {
-    //These DOM calls are temporary, as we will be switching to data-targets!
     this.gameMessage = document.querySelectorAll('*[data-game-message]')[0]; // These indexes mean there's no flexibility for now, as we need to wrap
     this.secretWord = document.querySelectorAll('[data-secret-word-display]')[0]; // Visible to user
     this.userGuesses = document.querySelectorAll('*[data-user-guesses]')[0];
@@ -23,53 +24,32 @@ export class clientDisplay {
       'Left_Leg'
     ]; // Bodypart ID's, in order of reveal
     this.gameState = gameState;
-    this.initDisplay();
+    this.reset();
+    this.loadGame();
 
-  }
-
-  initDisplay(gameState) {
-    console.log(gameState);
-    this.secretWord.innerHTML = this.gameState.blankword;
-    this.userGuesses.innerHTML = this.gameState.guesses;
-
-    //Updates styled Mystery Word
-    var secretWordContainer = this.secretWord;
-    this.secretWord.innerHTML = '';
-    this.gameState.blankword.split(' ').forEach(function(l) {
-      secretWordContainer.innerHTML +=
-        '<span class="guess-letter">' + l.toUpperCase() + '</span>';
-    });
-    console.log('Display initialized.');
-  }
-
-  //Guess will be incorrect, correct, or invalid
-  newGuess(guess) {
-    var secretWordContainer = this.secretWord;
-    this.secretWord.innerHTML = '';
-    this.gameState.blankword.split(' ').forEach(function(l) {
-      secretWordContainer.innerHTML +=
-        '<span class="guess-letter">' + l.toUpperCase() + '</span>';
-    });
-    this.userGuesses.innerHTML = 'Guesses: ' + this.gameState.guesses;
   }
 
   incorrectGuess(){
+    // display actions for an incorrect guess
       this.gameMessage.innerHTML = this.gameState.guesser + ' guessed incorrectly. There are ' + (6 - this.gameState.incorrect) + ' guesses left.';
       this.revealPart();
   }
 
   invalidGuess(){
+    // display actions for an invalid guess
       this.gameMessage.innerHTML =
         'That is not a valid character to guess, or has already been guessed!';
         this.revealPart();
   }
 
   correctGuess(){
+    // display actions for a correct guess
       this.gameMessage.innerHTML = this.gameState.guesser + ' guessed correctly!';
-      
+    this.updateSecretWord();
   }
 
   victory(){
+    // display actions for a victory game case
       this.gameMessage.innerHTML =
         '<span style="color: green">' +
         data.guesser +
@@ -77,70 +57,54 @@ export class clientDisplay {
   }
 
   newGame(){
+    // display actions for a new game case
       this.gameMessage.innerHTML = 'New game has started!';
-      this.reset();
   }
 
   defeat(){ 
+    // Display actions for a defeat case
       this.gameMessage.innerHTML =
         '<span style="color: red">' +
         this.gameState.guesser +
         ' guessed wrong. Game Over!</span>';
-      this.reset();
   }
 
   revealPart() {
+    // Reveal a bodypart
     var currentPartID = this.bodyParts[this.gameState.incorrect - 1];
     var currentPartElem = document.getElementById(currentPartID);
     currentPartElem.style.opacity = '1'; // This function should live in clientDisplay
   }
 
+  hidePart(partElement){
+    // Hide a bodypart
+    partElement.style.opacity = '0'; 
+  }
+
   loadGame(guessStage) {
     //Loads hangman model accordingly to game state when you load the page
-    console.log("Guess stage: " , this.gameState.incorrect);
     var incorrectGuesses = this.gameState.incorrect;
     if (incorrectGuesses === 0) return;
-    for (var i = 0; i < incorrectGuesses - 1; i++) {
-      console.log(i);
+    for (var i = 0; i < incorrectGuesses; i++) {
       var currentPartID = this.bodyParts[i];
       var currentPartElem = document.getElementById(currentPartID);
       currentPartElem.style.opacity = '1';
     }
   }
 
-
-
-  showSecretWord(){
-    var secretWordContainer = this.secretWord;
-    this.secretWord.innerHTML = '';
-    this.gameState.blankword.split(' ').forEach(function(l) {
-      secretWordContainer.innerHTML +=
-        '<span class="guess-letter">' + l.toUpperCase() + '</span>';
-    });
-  }
-
   reset() {
-    // Everything that needs to be done to reset the game board fully
-    console.log(this.gameState.incorrect);
+    // Everything needed to reset the game board fully
     for (let part of this.bodyParts) {
-      let partElem = document.getElementById(part);
-      partElem.style.opacity = '0'; // This function should live in clientDisplay
+      let partElement = document.getElementById(part);
+      this.hidePart(partElement);
     }
     this.userGuesses.innerHTML = "";
-    this.showSecretWord();
-    this.updateBlankWord(); 
+    this.updateSecretWord(); 
   }
 
   updatePastGuesses(){
+    // Display previously guessed letters
     this.userGuesses.innerHTML = 'Guesses: ' + this.gameState.guesses;
-  }
-
-  updateBlankWord(){
-    var secretWordContainer = this.secretWord;
-    this.gameState.blankword .split(' ').forEach(function(l) {
-      secretWordContainer.innerHTML +=
-        '<span class="guess-letter">' + l.toUpperCase() + '</span>';
-    });
   }
 
   updatePlayers(playerNames) {
@@ -149,15 +113,19 @@ export class clientDisplay {
     this.playerList.innerHTML = playerNames.players;
   }
 
+  updateSecretWord(){
+    //
+    var secretWordContainer = this.secretWord;
+    this.secretWord.innerHTML = '';
+    this.gameState.blankword.split(' ').forEach(function(l) {
+      secretWordContainer.innerHTML +=
+        '<span class="guess-letter">' + l.toUpperCase() + '</span>';
+    });
+  }
+
   showGuess(letter){
+    // Shows the current letter a user has selected
     this.guessDisplay.innerHTML = letter;
   }
-
-  invalidGuess(){
-    console.log("invalid guess");
-    // Display invalid guess notice
-  }
-
-
 
 }

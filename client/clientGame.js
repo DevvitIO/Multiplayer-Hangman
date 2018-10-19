@@ -23,11 +23,11 @@ export class clientGame {
 
   loadGame() {
     //Initializes clientDisplay
-    console.log(this.gameState.incorrect);
     this.useDisplay('loadGame', this.gameState.incorrect );
   }
 
   incorrectGuess(data, status) {
+    // In response to the server sending an incorrect guess event
     if (status === 'invalidGuess'){
       this.useDisplay('invalidGuess');
     } else if (status === 'incorrectGuess') {
@@ -40,13 +40,14 @@ export class clientGame {
   }
 
   correctGuess(data) {
-    console.log("Correct guess, game: ");
+    // In response to the server sending a correct guess event
     this.gameState = data;
-    this.useDisplay('newGuess', 'correctGuess');
+    this.useDisplay('correctGuess');
   }
 
   endGame(data, status) {
-    this.useDisplay('showSecretWord');
+    // In response to the server sending a finished game event
+    this.useDisplay('updateSecretWord');
     this.useDisplay('updatePastGuesses');
     if (status === 'victory') {
       this.useDisplay('victory');
@@ -61,25 +62,21 @@ export class clientGame {
     }
   }
 
-
   updatePlayers(data) {
+    // Update the player list
     this.display.updatePlayers(data);
   }
 
   submitGuess(letter, gameState=null) {
-    console.log("Letter: " , letter);
-    if (gameState !== null) { console.log("Check"); this.gameState = gameState; } // Hacky work around for losing the gameState reference in a keydown event.
-    // This has just been copy pasted over from clientSocket, and could do with a refactor
+    // Submit a guess to the server ( if it passes client side validation )
     var isAValidCharacter = /^[a-zA-Z]*$/.test(letter) === true && letter != '';
     var isAnInvalidCharacter = /^[a-zA-Z]*$/.test(letter) === false || letter == '';
     if (isAValidCharacter) {
-      
-    console.log("Submit guess gamestate: " , typeof(this.gameState.guesses), this.gameState.guesses);
       let guessFound = this.gameState.guesses.find(guess => {
         return guess === letter;
       });
       if (guessFound === letter) {
-        this.useDisplay('newGuess', 'correctGuess');
+        this.useDisplay('updateSecretWord');
         return;
       }
       socket.sendToServer('newGuess', letter);
@@ -87,8 +84,6 @@ export class clientGame {
         this.display.newGuess(this.gameState, 'invalid');
       return;
     }
-    
-    console.log("Submit guess gamestate: " , this.gameState);
   }
 
   initKeyboard() {
